@@ -27,7 +27,13 @@
 
   <script>
     const enemyCards = ["공격성", "방어력", "속도", "지능", "카리스마"];
-    const userCards = ["논리적 설득", "빠른 말하기", "냉정한 판단", "해법 찾기", "위로 부족"];
+    // URL 파라미터에서 cards 값 받아오기 
+    const urlParams = new URLSearchParams(window.location.search);
+    const cardsParam = urlParams.get("cards");
+    const userCards = cardsParam ? JSON.parse(decodeURIComponent(cardsParam)) : [];
+
+    console.log("cardsParam:", cardsParam);
+    console.log("userCards:", userCards);
 
     const enemyCardsDiv = document.getElementById("enemyCards");
     const userCardsDiv = document.getElementById("userCards");

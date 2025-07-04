@@ -24,30 +24,30 @@
     const cardListDiv = document.getElementById("cardList");
     const goBattleBtn = document.getElementById("goBattleBtn");
 
+    // 기존 tempCards 대신, URL에서 cards 파라미터 받아오기
+    const urlParams = new URLSearchParams(window.location.search);
+    const cardsParam = urlParams.get("cards");
+    const cards = cardsParam ? JSON.parse(decodeURIComponent(cardsParam)) : [];
+
     // 카드 생성 시뮬레이션 (2초 후 생성)
     setTimeout(() => {
       loadingDiv.style.display = "none";
       cardListDiv.style.display = "block";
       goBattleBtn.style.display = "block";
 
-      const tempCards = [
-        "논리적 설득",
-        "빠른 말하기",
-        "냉정한 판단",
-        "해법 찾기",
-        "위로 부족"
-      ];
-
-      tempCards.forEach(card => {
+       // 받아온 카드 리스트를 기반으로 동적 생성
+       cards.forEach(card => {
         const div = document.createElement("div");
-        div.className = "card-item";
+        div.className = "card-item"; 
         div.textContent = card;
         cardListDiv.appendChild(div);
       });
     }, 2000);
 
+    // battle.html로 이동하면서 카드 정보 쿼리로 넘겨주기 
     goBattleBtn.addEventListener("click", () => {
-      window.location.href = "battle.html";
+      const query = encodeURIComponent(JSON.stringify(cards));
+      window.location.href = `battle.html?cards=${query}`;   
     });
   </script>
 </body>
