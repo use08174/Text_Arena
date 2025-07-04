@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Generated Cards</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="container">
+    <h1>🃏 생성된 카드</h1>
+
+    <div id="loading">카드를 생성 중입니다...</div>
+
+    <div id="cardList" class="card-list" style="display: none;">
+      <!-- 생성된 카드 표시 -->
+    </div>
+
+    <button id="goBattleBtn" style="display: none;">⚔️ 전투장으로 가기</button>
+  </div>
+
+  <script>
+    const loadingDiv = document.getElementById("loading");
+    const cardListDiv = document.getElementById("cardList");
+    const goBattleBtn = document.getElementById("goBattleBtn");
+
+    // 카드 생성 시뮬레이션 (2초 후 생성)
+    setTimeout(() => {
+      loadingDiv.style.display = "none";
+      cardListDiv.style.display = "block";
+      goBattleBtn.style.display = "block";
+
+      const tempCards = [
+        "논리적 설득",
+        "빠른 말하기",
+        "냉정한 판단",
+        "해법 찾기",
+        "위로 부족"
+      ];
+
+      tempCards.forEach(card => {
+        const div = document.createElement("div");
+        div.className = "card-item";
+        div.textContent = card;
+        cardListDiv.appendChild(div);
+      });
+    }, 2000);
+
+    goBattleBtn.addEventListener("click", () => {
+      window.location.href = "battle.html";
+    });
+  </script>
+</body>
+</html>

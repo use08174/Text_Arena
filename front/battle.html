@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Persona Card Battle Arena</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="battle-container">
+    <h1>⚔️ 전투장</h1>
+
+    <div class="enemy-deck">
+      <h2>👾 적 카드덱</h2>
+      <div class="card-row" id="enemyCards">
+        <!-- 적 카드 5장 -->
+      </div>
+    </div>
+
+    <div class="user-deck">
+      <h2>🧑‍💻 내 카드덱</h2>
+      <div class="card-row" id="userCards">
+        <!-- 사용자 카드 5장 -->
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const enemyCards = ["공격성", "방어력", "속도", "지능", "카리스마"];
+    const userCards = ["논리적 설득", "빠른 말하기", "냉정한 판단", "해법 찾기", "위로 부족"];
+
+    const enemyCardsDiv = document.getElementById("enemyCards");
+    const userCardsDiv = document.getElementById("userCards");
+
+    enemyCards.forEach(card => {
+      const div = document.createElement("div");
+      div.className = "card";
+      div.textContent = card;
+      enemyCardsDiv.appendChild(div);
+    });
+
+    userCards.forEach(card => {
+      const div = document.createElement("div");
+      div.className = "card";
+      div.textContent = card;
+      userCardsDiv.appendChild(div);
+    });
+  </script>
+</body>
+</html>

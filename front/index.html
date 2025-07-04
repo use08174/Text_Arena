@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>⚔️ 말의 전장</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="container">
+    <h1>⚔️ 말의 전장</h1>
+
+    <textarea id="promptInput" rows="5" placeholder="당신의 페르소나를 입력해주세요"></textarea>
+    <button id="generateBtn">🃏 카드 생성하기</button>
+
+    <div id="cardList" class="card-list"></div>
+  </div>
+
+  <script>
+    const promptInput = document.getElementById("promptInput");
+    const generateBtn = document.getElementById("generateBtn");
+    const cardList = document.getElementById("cardList");
+
+    generateBtn.addEventListener("click", () => {
+      const prompt = promptInput.value.trim();
+      if (!prompt) return;
+
+      console.log("사용자 프롬프트:", prompt);
+
+      // TODO: 여기서 OpenAI API 호출 가능
+      // 현재는 임시 카드 5장 생성
+      const tempCards = [
+        "논리적 설득",
+        "빠른 말하기",
+        "냉정한 판단",
+        "해법 찾기",
+        "위로 부족"
+      ];
+
+      // 카드 리스트 초기화
+      cardList.innerHTML = "<h2>🗡️ 생성된 카드</h2>";
+
+      tempCards.forEach(card => {
+        const div = document.createElement("div");
+        div.className = "card-item";
+        div.textContent = card;
+        cardList.appendChild(div);
+      });
+    });
+  </script>
+</body>
+</html>
