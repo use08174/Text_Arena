@@ -33,7 +33,7 @@
       
       // OpenAI API 호출 기능 추가
       try {
-      const response = await fetch("http://localhost:8000/generate-card", {
+      const response = await fetch("http://localhost:8000/generate-cards", {
         method: "POST",
         headers: {
           "Content-Type": "application/json"
@@ -42,9 +42,11 @@
       });
 
       const data = await response.json();
+      console.log("받은 응답:", data);
+      const cards = data.cards; 
 
       // 받아온 카드 5개를 쿼리로 넘기기
-      const query = encodeURIComponent(JSON.stringify(data.cards));
+      const query = encodeURIComponent(JSON.stringify(cards));
       window.location.href = `cards.html?cards=${query}`;
     } catch (error) {
       alert("카드 생성 중 오류가 발생했습니다.");

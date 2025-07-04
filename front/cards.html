@@ -23,12 +23,14 @@
     const loadingDiv = document.getElementById("loading");
     const cardListDiv = document.getElementById("cardList");
     const goBattleBtn = document.getElementById("goBattleBtn");
+    const errorMsg = document.getElementById("errorMsg");
 
     // 기존 tempCards 대신, URL에서 cards 파라미터 받아오기
     const urlParams = new URLSearchParams(window.location.search);
     const cardsParam = urlParams.get("cards");
     const cards = cardsParam ? JSON.parse(decodeURIComponent(cardsParam)) : [];
 
+    
     // 카드 생성 시뮬레이션 (2초 후 생성)
     setTimeout(() => {
       loadingDiv.style.display = "none";
