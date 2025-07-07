@@ -8,10 +8,15 @@
 </head>
 <body>
   <div class="container">
-    <h1>⚔️ 말의 전장</h1>
+    <h1>⚔️ Text Arena ⚔️</h1>
 
     <textarea id="promptInput" rows="5" placeholder="당신의 페르소나를 입력해주세요"></textarea>
     <button id="generateBtn">🃏 카드 생성하기</button>
+
+    <div id="loading" style="display: none; margin-top: 1.5rem; text-align: center;">
+      <div class="spinner"></div>
+      <p>카드를 생성 중입니다...</p>
+    </div>
 
     <div id="cardList" class="card-list"></div>
   </div>
@@ -19,34 +24,35 @@
   <script>
     const promptInput = document.getElementById("promptInput");
     const generateBtn = document.getElementById("generateBtn");
-    const cardList = document.getElementById("cardList");
 
-    generateBtn.addEventListener("click", () => {
+    generateBtn.addEventListener("click", async () => {
       const prompt = promptInput.value.trim();
       if (!prompt) return;
 
       console.log("사용자 프롬프트:", prompt);
-
-      // TODO: 여기서 OpenAI API 호출 가능
-      // 현재는 임시 카드 5장 생성
-      const tempCards = [
-        "논리적 설득",
-        "빠른 말하기",
-        "냉정한 판단",
-        "해법 찾기",
-        "위로 부족"
-      ];
-
-      // 카드 리스트 초기화
-      cardList.innerHTML = "<h2>🗡️ 생성된 카드</h2>";
-
-      tempCards.forEach(card => {
-        const div = document.createElement("div");
-        div.className = "card-item";
-        div.textContent = card;
-        cardList.appendChild(div);
+      
+      // OpenAI API 호출 기능 추가
+      try {
+      const response = await fetch("http://localhost:8000/generate-cards", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ prompt: prompt })
       });
-    });
+
+      const data = await response.json();
+      console.log("받은 응답:", data);
+      const cards = data.cards; 
+
+      // 받아온 카드 5개를 쿼리로 넘기기
+      const query = encodeURIComponent(JSON.stringify(cards));
+      window.location.href = `cards.html?cards=${query}`;
+    } catch (error) {
+      alert("카드 생성 중 오류가 발생했습니다.");
+      console.error("Error:", error);
+    }
+  });
   </script>
-</body>
+  </body>
 </html>

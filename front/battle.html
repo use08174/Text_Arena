@@ -12,6 +12,7 @@
 
     <div class="enemy-deck">
       <h2>👾 적 카드덱</h2>
+      <div id="enemyLoading">👾 AI 적 카드 불러오는 중...</div>
       <div class="card-row" id="enemyCards">
         <!-- 적 카드 5장 -->
       </div>
@@ -26,19 +27,37 @@
   </div>
 
   <script>
-    const enemyCards = ["공격성", "방어력", "속도", "지능", "카리스마"];
-    const userCards = ["논리적 설득", "빠른 말하기", "냉정한 판단", "해법 찾기", "위로 부족"];
+    //const enemyCards = ["공격성", "방어력", "속도", "지능", "카리스마"];
+    // URL 파라미터에서 cards 값 받아오기 
+    const urlParams = new URLSearchParams(window.location.search);
+    const cardsParam = urlParams.get("cards");
+    const userCards = cardsParam ? JSON.parse(decodeURIComponent(cardsParam)) : [];
+
+    console.log("cardsParam:", cardsParam);
+    console.log("userCards:", userCards);
 
     const enemyCardsDiv = document.getElementById("enemyCards");
     const userCardsDiv = document.getElementById("userCards");
 
-    enemyCards.forEach(card => {
-      const div = document.createElement("div");
-      div.className = "card";
-      div.textContent = card;
-      enemyCardsDiv.appendChild(div);
+    // AI 카드 불러오기
+    fetch("http://localhost:8000/generate-ai-cards")
+    .then(response => response.json())
+    .then(data => {
+      const enemyCards = data.cards; 
+      enemyCards.forEach(card => {
+        const div = document.createElement("div");
+        div.className = "card";
+        div.textContent = card;
+        enemyCardsDiv.appendChild(div);
+      });
+      const loadingDiv = document.getElementById("enemyLoading");
+      if (loadingDiv) loadingDiv.remove();
+    })
+    .catch(error => {
+      console.error("AI 카드 불러오기 실패:", error);
     });
 
+    // 사용자 카드 표시
     userCards.forEach(card => {
       const div = document.createElement("div");
       div.className = "card";

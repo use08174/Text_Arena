@@ -1,0 +1,23 @@
+# 1. 가상환경
+venv/
+.venv/
+
+# 2. Python 관련
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+
+# 3. 환경 변수 파일 (.env 등)
+.env
+.env.*
+
+# 4. VSCode 관련 설정 (팀 협업 시 안 올리는 게 좋음)
+.vscode/
+
+# 5. OS별 파일
+.DS_Store
+Thumbs.db
+
+# 6. 로그나 결과물
+*.log
