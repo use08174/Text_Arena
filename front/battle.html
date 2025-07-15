@@ -1,49 +1,64 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Persona Card Battle Arena</title>
-  <link rel="stylesheet" href="style.css" />
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>전투장</title>
+  <link rel="stylesheet" href="css/style.css"/>
 </head>
 <body>
-  <div class="battle-container">
+  <div class="container battle-container">
     <h1>⚔️ 전투장</h1>
 
+    <!-- 적 카드 덱 -->
     <div class="enemy-deck">
       <h2>👾 적 카드덱</h2>
-      <div class="card-row" id="enemyCards">
-        <!-- 적 카드 5장 -->
-      </div>
+      <div class="card-row" id="enemyCards"></div>
     </div>
 
+    <!-- 내 카드 덱 -->
     <div class="user-deck">
       <h2>🧑‍💻 내 카드덱</h2>
-      <div class="card-row" id="userCards">
-        <!-- 사용자 카드 5장 -->
-      </div>
+      <div class="card-row" id="userCards"></div>
     </div>
+
+    <!-- 전투 시작 버튼 -->
+    <button id="startBattle">⚔️ 전투 시작</button>
   </div>
 
   <script>
-    const enemyCards = ["공격성", "방어력", "속도", "지능", "카리스마"];
-    const userCards = ["논리적 설득", "빠른 말하기", "냉정한 판단", "해법 찾기", "위로 부족"];
+    // 1) URL에서 userCards, aiCards, order 파싱
+    const params    = new URLSearchParams(window.location.search);
+    const userCards = JSON.parse(params.get('userCards') || '[]');  // [{id,name},...]
+    const aiCards   = JSON.parse(params.get('aiCards')   || '[]');  // [{id,name},...]
+    const order     = JSON.parse(params.get('order')     || '[]');  // ['card3','card1',...]
 
-    const enemyCardsDiv = document.getElementById("enemyCards");
-    const userCardsDiv = document.getElementById("userCards");
+    // 2) 카드 렌더링
+    const enemyEl = document.getElementById('enemyCards');
+    const userEl  = document.getElementById('userCards');
 
-    enemyCards.forEach(card => {
-      const div = document.createElement("div");
-      div.className = "card";
-      div.textContent = card;
-      enemyCardsDiv.appendChild(div);
+    // order 순서대로 AI 카드
+    order.forEach((_, idx) => {
+      const cardObj = aiCards[idx];
+      const cardDiv = document.createElement('div');
+      cardDiv.className   = 'card';
+      cardDiv.textContent = cardObj.name;
+      enemyEl.appendChild(cardDiv);
     });
 
-    userCards.forEach(card => {
-      const div = document.createElement("div");
-      div.className = "card";
-      div.textContent = card;
-      userCardsDiv.appendChild(div);
+    // order 순서대로 내 카드
+    order.forEach(id => {
+      const cardObj = userCards.find(c => c.id === id);
+      const cardDiv = document.createElement('div');
+      cardDiv.className   = 'card';
+      cardDiv.textContent = cardObj.name;
+      userEl.appendChild(cardDiv);
+    });
+
+    // 3) 전투 시작 버튼 클릭 시 fight.html로 이동
+    document.getElementById('startBattle').addEventListener('click', () => {
+      // 현재 URL querystring 그대로 전달
+      window.location.href = `fight.html${window.location.search}`;
     });
   </script>
 </body>

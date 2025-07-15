@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>전투 진행</title>
+  <link rel="stylesheet" href="css/style.css"/>
+  <style>
+   
+    html, body {
+      margin: 0;
+      padding: 0;
+    
+      height: 100%;
+    }
+
+    .fight-container {
+      position: relative;
+      padding: 2rem;
+      text-align: center;
+    }
+
+    .row {
+      display: flex;
+      align-items: center;
+      justify-content: space-evenly; 
+      gap: 1rem;                     
+      margin-bottom: 1.5rem;        
+    }
+
+    .card {
+      width: 90px;   
+      height: 130px; 
+      transition: transform 0.4s ease;
+    }
+    .card.attack { transform: translateY(30px); }
+    .card.defend { transform: translateY(-30px) ; }
+
+  
+    .hp-display {
+      font-size: 1.4rem;
+      font-weight: bold;
+      color: #fff;
+      min-width: 100px;
+      text-align: left;
+    }
+    .row h3 {
+      margin: 0;
+      color: #fff;
+      min-width: 100px;
+      text-align: right;
+    }
+
+  
+    .modal-backdrop {
+      position: fixed; top:0; left:0; width:100vw; height:100vh;
+      display: none; justify-content: center; align-items: center; z-index:100;
+    }
+    .modal {
+      background: #fff; color: #333;
+      padding: 2rem 3rem; border-radius:10px;
+      box-shadow: 0 0 20px rgba(0,0,0,0.3);
+      max-width:80%; text-align:center; font-size:1.4rem;
+    }
+  </style>
+</head>
+<body>
+  <div class="container fight-container">
+    <h1>⚔️ 전투 진행 중...</h1>
+
+    <div class="row">
+      <div id="aiHpDisplay" class="hp-display">HP: 100</div>
+      <div id="enemyRow" class="card-row"></div>
+      <h3>👾 적 카드덱</h3>
+    </div>
+
+    <div class="row">
+      <div id="userHpDisplay" class="hp-display">HP: 100</div>
+      <div id="userRow" class="card-row"></div>
+      <h3>🧑‍💻 내 카드덱</h3>
+    </div>
+
+    <div id="modalBackdrop" class="modal-backdrop">
+      <div id="modal" class="modal"></div>
+    </div>
+  </div>
+
+  <script src="js/fight.js"></script>
+</body>
+</html>
