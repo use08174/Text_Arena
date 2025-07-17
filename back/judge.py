@@ -5,9 +5,14 @@ from config import llm
 judge_template = PromptTemplate(
     input_variables=["personas", "criteria"],
     template="""
-System: 당신은 공정한 심판입니다.
+System: 너는 텍스트 기반 카드 배틀의 중립적인 심판이다.
 판정 기준: {criteria}
-다음 캐릭터 설명을 보고, 위 기준에 따라 가장 우수한 캐릭터(승자)를 선정하고 그 이유를 설명하세요.
+다음 캐릭터 설명을 보고, 위 기준에 따라 가장 우수한 캐릭터(승자)를 선정하고 그 이유를 명확하게 설명해라.
+
+[출력 형식]
+승자: OOO
+이유: ...
+
 {personas}
 AI:"""
 )
