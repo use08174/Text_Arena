@@ -1,0 +1,222 @@
+[
+  {
+    "id": 1,
+    "name": "해리 오터",
+    "persona_main": "어둠에 대항하는 용감한 소년 마법사",
+    "persona_detail": "부모의 희생으로 사랑과 결속의 힘을 배웠으며, 번개 모양의 흉터로 어둠의 위협을 감지한다. 위기 상황에서 기지를 발휘해 동료들을 구하는 비범한 직감을 지녔다.",
+    "gender": "Male",
+    "age": 17,
+    "weakness": "번개 흉터가 욱신거리면 집중력이 크게 저하된다.",
+    "attack_power": 40,
+    "image": "./assets/1.png"
+  },
+  {
+    "id": 2,
+    "name": "헤르미온스",
+    "persona_main": "천재적인 마법 이론가",
+    "persona_detail": "방대한 마법 지식과 논리적 사고로 문제를 분석·해결하며, 불가능해 보이는 주문도 책 속 지식으로 실현한다. 친구를 지키기 위해 위험을 무릅쓰는 연대감과 침착함이 뛰어나다.",
+    "gender": "Female",
+    "age": 17,
+    "weakness": "완벽주의로 인한 스트레스와 과로가 잦다.",
+    "attack_power": 35,
+    "image": "./assets/2.png"
+  },
+  {
+    "id": 3,
+    "name": "볼트모트",
+    "persona_main": "불멸과 권력에 집착하는 어둠의 군주",
+    "persona_detail": "공포를 조종해 적을 무너뜨리며, 호크룩스로 자신의 영혼을 분리·보존해 어떤 공격에도 부활한다. 감정을 드러내지 않아 진짜 의도를 파악하기 어렵다.",
+    "gender": "Male",
+    "age": 37,
+    "weakness": "호크룩스가 파괴되면 본체가 완전히 소멸될 위험이 있다.",
+    "attack_power": 45,
+    "image": "./assets/3.png"
+  },
+  {
+    "id": 4,
+    "name": "말푸이",
+    "persona_main": "순혈주의에 집착하는 전략가",
+    "persona_detail": "예리한 관찰력으로 교내외 정보를 수집해 유리한 위치를 선점한다. 가문의 명예를 지키려는 압박과 인정 욕구가 크나, 결정적 순간엔 불안에 흔들리기 쉽다.",
+    "gender": "Male",
+    "age": 17,
+    "weakness": "가문의 명예에 대한 압박감과 인정 욕구가 지나치게 크다.",
+    "attack_power": 30,
+    "image": "./assets/4.png"
+  },
+  {
+    "id": 5,
+    "name": "론 위즐리",
+    "persona_main": "충성심 깊은 친구이자 예측 불허한 기지",
+    "persona_detail": "가족과 친구에 대한 애정이 깊어 위기에선 의외의 기지로 상황을 타개한다. 가끔 자신감이 흔들려 주저하지만, 불안 속에서도 앞으로 나아가는 용기를 보여준다.",
+    "gender": "Male",
+    "age": 17,
+    "weakness": "자신감 결여와 형제들의 그늘에 가려질 때가 있다.",
+    "attack_power": 20,
+    "image": "./assets/5.png"
+  },
+  {
+    "id": 6,
+    "name": "아연맨",
+    "persona_main": "은빛 동력 코어로 전장을 제어하는 실버 아이은맨",
+    "persona_detail": "순은 합금 슈트의 중심에 내장된 동력 코어가 초고압 은빛 레이저와 에너지 방어막을 즉시 생성하며, 부스트 제트를 이용해 눈 깜짝할 사이에 전장을 가로지르고, 나노 입자 자가 수리 기능으로 전투 중 손상된 부위를 즉시 복구한다.",
+    "gender": "Male",
+    "age": 45,
+    "weakness": "산성비·화학 가스 같은 부식성 환경에 노출되면 은 슈트가 부식되어 레이저 출력이 급격히 저하된다.",
+    "attack_power": 45,
+    "image": "./assets/6.png"
+  },
+  {
+    "id": 7,
+    "name": "캡틴 아프리카",
+    "persona_main": "캡틴의 부름으로 아프리카의 모든 짐승들이 총집합",
+    "persona_detail": "방패를 대지에 내리치면 진동으로 사자·코끼리·하이에나를 즉시 소환하고, 방패 위 문양으로 각 짐승에게 돌격·매복·차단 명령을 실시간 지휘한다.",
+    "gender": "Male",
+    "age": 35,
+    "weakness": "야생 동물 없는 도심·실내에선 소환 불가, 방패 파손 시 전투력 대폭 저하",
+    "attack_power": 40,
+    "image": "./assets/7.png"
+  },
+  {
+    "id": 8,
+    "name": "헐ㅋ",
+    "persona_main": "웃으면 웃을수록 강해지는 괴력 괴수",
+    "persona_detail": "실소가 폭발할 때마다 근육과 내구도가 급상승해, 빌딩도 거뜬히 들어 던질 수 있다.",
+    "gender": "Male",
+    "age": 40,
+    "weakness": "우울하면 힘이 약해짐",
+    "attack_power": 50,
+    "image": "./assets/8.png"
+  },
+  {
+    "id": 9,
+    "name": "스파이시맨",
+    "persona_main": "손에서 매운 고추가루가 나오는 소년 히어로",
+    "persona_detail": "거미줄 대신 매운 고추가루 섬광탄을 발사해 적의 시야와 호흡을 마비시킨다.",
+    "gender": "Male",
+    "age": 19,
+    "weakness": "우유나 유제품에 닿으면 매운 고추가루가 즉시 중화되어 시야·호흡 마비 효과가 사라진다.",
+    "attack_power": 30,
+    "image": "./assets/9.png"
+  },
+  {
+    "id": 10,
+    "name": "그루토",
+    "persona_main": "뿌리와 덩굴로 전장을 수호하는 나무 정령",
+    "persona_detail": "두꺼운 뿌리를 땅속 깊이 뻗어 적의 이동을 봉쇄하고, 거대 덩굴을 솟구쳐 방어벽과 돌격 기둥을 동시에 생성한다.",
+    "gender": "Neutral",
+    "age": 10,
+    "weakness": "“I am Groot”외 의사소통 불가 & 화염이나 고열에 노출되면 뿌리가 타버려 재생 능력이 크게 저하되고, 덩굴 생성이 불가능해진다.",
+    "attack_power": 10,
+    "image": "./assets/10.png"
+  },
+  {
+    "id": 11,
+    "name": "신비렐라",
+    "persona_main": "품위와 마법 유리구두로 위기를 넘기는 침착한 전략가",
+    "persona_detail": "마법 유리구두를 이용해 공간을 이동한다. 화려한 드레스와 기품 있는 말투로 방심을 유도한다.",
+    "gender": "Female",
+    "age": 19,
+    "weakness": "마법의 효과가 자정이 되면 사라지기 때문에 장기전에서 불리함.",
+    "attack_power": 30,
+    "image": "./assets/11.png"
+  },
+  {
+    "id": 12,
+    "name": "백살공주",
+    "persona_main": "숲속 친구들과 함께 싸우는 사랑의 수호자",
+    "persona_detail": "숲 속 동물들을 소환하여 방해하거나 적의 움직임을 봉쇄한다. 마법 거울로 상대방의 약점과 상태를 간파하여 전략적으로 움직인다.",
+    "gender": "Female",
+    "age": 14,
+    "weakness": "지나친 순수함으로 인해 함정에 쉽게 빠짐(독사과)",
+    "attack_power": 20,
+    "image": "./assets/12.png"
+  },
+  {
+    "id": 13,
+    "name": "엘샤",
+    "persona_main": "얼음 회오리와 감옥으로 전장을 얼려버리는 냉기의 마법사",
+    "persona_detail": "강력한 얼음 마법으로 공격과 방어를 동시에 수행할 수 있는 전투 마스터. 얼음 창, 얼음 회오리, 얼음 감옥 사용 가능.",
+    "gender": "Female",
+    "age": 21,
+    "weakness": "감정이 흔들리면 얼음 마법이 폭주하거나 제어 불가 상태로 변함.",
+    "attack_power": 40,
+    "image": "./assets/13.png"
+  },
+  {
+    "id": 14,
+    "name": "라픈젤",
+    "persona_main": "머리카락과 노래로 전세를 바꾸는 마법 소녀",
+    "persona_detail": "머리카락을 밧줄처럼 활용해 적을 묶거나 휘두르며 공격한다. 마법의 노래로 체력을 회복한다.",
+    "gender": "Female",
+    "age": 18,
+    "weakness": "머리카락이 공격 도중 잘릴 경우 전투력 급감.",
+    "attack_power": 35,
+    "image": "./assets/14.png"
+  },
+  {
+    "id": 15,
+    "name": "민수공듀",
+    "persona_main": "미모는 나의 무기, 요술봉으로 모두를 사로잡는다",
+    "persona_detail": "압도적인 미모와 존재감으로 적의 주의를 분산시키고, 요술봉을 휘둘러 남성 캐릭터들을 혼란에 빠뜨린다.",
+    "gender": "Male",
+    "age": 24,
+    "weakness": "더 예쁜 공주가 공격하면 공격력이 두 배.",
+    "attack_power": 30,
+    "image": "./assets/15.png"
+  },
+  {
+    "id": 16,
+    "name": "토토로",
+    "persona_main": "신비로운 숲의 수호자",
+    "persona_detail": "커다란 입으로 주변의 공기와 물건을 빨아들여 적을 무력화한다. 위급 상황에 고양이 버스를 불러 빠르게 이동하거나 지원받는다.",
+    "gender": "Neutral",
+    "age": 12,
+    "weakness": "인간 세계의 오염과 파괴에 민감하다.",
+    "attack_power": 25,
+    "image": "./assets/16.png"
+  },
+  {
+    "id": 17,
+    "name": "포뇽",
+    "persona_main": "바다에서 온 작은 인어 소녀",
+    "persona_detail": "바다 생명체들과 소통하며 바다의 힘을 빌려 공격과 방어를 한다. 물을 자유롭게 다루며 빠른 속도로 수중 전투에 능하다. 변신 능력으로 물과 육지 모두에서 활약한다.",
+    "gender": "Neutral",
+    "age": 5,
+    "weakness": "아직 어린아이여서 체력이 약하고, 물 밖에서는 힘이 제한된다.",
+    "attack_power": 20,
+    "image": "./assets/17.png"
+  },
+  {
+    "id": 18,
+    "name": "가쓰오나시",
+    "persona_main": "감정을 숨기고 욕망을 드러내는 신비한 존재",
+    "persona_detail": "자신의 욕구를 채우기 위해 주변을 헤매며, 때로는 무서운 모습으로 변신한다. 황금을 만들어내는 능력이 있어 전투 중 자원을 무한히 공급할 수 있다.",
+    "gender": "Neutral",
+    "age": 20,
+    "weakness": "진정한 소통과 이해를 얻지 못하면 폭주할 위험이 크다.",
+    "attack_power": 35,
+    "image": "./assets/18.png"
+  },
+  {
+    "id": 19,
+    "name": "도라지몽",
+    "persona_main": "미래에서 온 도우미 로봇",
+    "persona_detail": "다양한 미래 도구를 사용해 친구들을 돕고 문제를 해결한다. 도구 중 헬리콥터 모양의 작은 비행 장치를 사용해 빠르게 이동할 수 있다.",
+    "gender": "Neutral",
+    "age": 10,
+    "weakness": "배터리가 다 떨어지면 움직이지 못한다.",
+    "attack_power": 30,
+    "image": "./assets/19.png"
+  },
+  {
+    "id": 20,
+    "name": "조퉁퉁",
+    "persona_main": "노래로 사람을 매혹시킨다.",
+    "persona_detail": "노래로 상대를 홀리고 최면을 걸 수 있는 능력이 있어 사람들을 매혹시킨다. 뛰어난 힘도 겸비하고 있다.",
+    "gender": "Male",
+    "age": 8,
+    "weakness": "느린 반응 속도와 과체중으로 민첩성이 떨어진다.",
+    "attack_power": 25,
+    "image": "./assets/20.png"
+  }
+]
