@@ -1,13 +1,6 @@
 from langchain.chat_models import ChatOpenAI
 from langchain.agents import initialize_agent, AgentType
-import json
 
-# JSON 파일에서 캐릭터 정보 읽기
-def load_characters(filepath):
-    with open(filepath, "r", encoding="utf-8") as f:
-        return json.load(f)
-
-# 캐릭터 에이전트 생성 함수
 def create_character_agent(character_info):
     system_message = (
         f"당신은 캐릭터 '{character_info['name']}'입니다.\n"
@@ -27,11 +20,14 @@ def create_character_agent(character_info):
         verbose=True,
         agent_kwargs={"system_message": system_message},
     )
-    return agent
+    return {
+        "name": character_info['name'],
+        "agent": agent,
+        "desc": system_message  # 판정용 설명으로 재사용
+    }
 
-# 모든 캐릭터 에이전트 생성
 def create_all_agents(characters):
-    agents = {}
+    agents = []
     for c in characters:
-        agents[c['name']] = create_character_agent(c)
+        agents.append(create_character_agent(c))
     return agents
