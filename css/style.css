@@ -1,0 +1,185 @@
+/* 전체 배경 & 기본 폰트 */
+body {
+  margin: 0;
+  padding: 0;
+  background: url('https://images.unsplash.com/photo-1599409132382-21ba6c90c8ac?fit=crop&w=1200&q=80') center/cover no-repeat;
+  height: 100vh;
+  color: #fff;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* 반투명 컨테이너 */
+.container {
+  background: rgba(0, 0, 0, 0.6);
+  max-width: 1100px;
+  margin: 3rem auto;
+  padding: 2rem;
+  border-radius: 10px;
+  box-shadow: 0 0 20px #000;
+}
+
+h1 {
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
+/* 공통 버튼/입력 스타일 */
+textarea {
+  width: 100%;
+  font-size: 1rem;
+  padding: 0.75rem;
+  border-radius: 5px;
+  border: none;
+  resize: none;
+  margin-top: 1rem;
+}
+button {
+  width: 100%;
+  margin-top: 0.5rem;
+  padding: 0.75rem;
+  font-size: 1.2rem;
+  background: #d63447;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+button:hover:not(:disabled) {
+  background: #a82c37;
+}
+
+/* 카드 줄 공통 */
+.card-row {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  margin: 1rem 0;
+  padding-bottom: 0.5rem;
+}
+
+/* index.html 전용: 20장 → 7 / 7 / 6 그리드 배치 */
+#cardGrid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 1rem;
+  justify-items: center;
+}
+
+.enemy-deck,
+.user-deck {
+  margin-right: 7rem;
+  margin-left: 4rem;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  margin-top: 1rem;
+}
+
+.enemy-deck .card-row,
+.user-deck .card-row {
+  flex: 1;
+  justify-content: center;
+}
+
+/* 카드 박스 공통 (이미지를 배경으로 가득 채움) */
+.card {
+  background-color: #333;           /* 이미지 로딩 전 기본 색상 */
+  border: 2px solid #d63447;
+  border-radius: 8px;
+  width: 100px;
+  height: 140px;
+  position: relative;               /* 오버레이용 */
+  overflow: hidden;
+  cursor: pointer;
+  transition: transform 0.2s ease, background-color 0.2s ease;
+  background-size: cover;           /* 배경 이미지가 카드 전체를 채우도록 */
+  background-position: center;      /* 중앙 기준으로 크롭 */
+  background-repeat: no-repeat;
+}
+.card:hover {
+  opacity: 0.9;
+}
+.card.selected {
+
+  border-color: #ffffff;
+}
+
+/* 카드 텍스트 오버레이 */
+.card-info {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  padding: 0.5rem;
+  background: linear-gradient(0deg, rgba(0,0,0,0.8), transparent);
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.25rem;
+}
+.card-info .card-name,
+.card-info .card-main {
+  margin: 0;
+  color: #fff;
+  text-shadow: 0 0 5px rgba(0,0,0,0.7);
+  text-align: center;
+}
+.card-info .card-name {
+  font-size: 0.95rem;
+}
+.card-info .card-main {
+  font-size: 0.75rem;
+  line-height: 1.2;
+}
+
+/* 카드 위쪽 중앙에 번호 배치하는 배지 */
+.order-badge {
+  position: absolute;
+  top: 15px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #ffffff;
+  color: #000000;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  font-size: 1rem;
+  line-height: 27px;
+  text-align: center;
+  pointer-events: none;
+}
+
+/* 심판 프롬프트 섹션 */
+.judge-section label {
+  display: block;
+  font-size: 25px;
+}
+.judge-section textarea {
+  width: 100%;
+  box-sizing: border-box;
+}
+
+#toBattle {
+  margin-top: 0.5rem;
+}
+
+.fight-container .card-row {
+  overflow-x: visible;
+  gap: 1rem;
+}
+
+.fight-container .card.attack {
+  transform: translateY(50px);
+}
+.fight-container .row {
+  margin-bottom: 4rem;
+}
+.fight-container .card.defend {
+  transform: translateY(-30px);
+}

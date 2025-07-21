@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>전투장</title>
+  <link rel="stylesheet" href="css/style.css"/>
+</head>
+<body>
+  <div class="container battle-container">
+    <h1>⚔️ 전투장</h1>
+
+    <!-- 적 카드 덱 -->
+    <div class="enemy-deck">
+      <h2>👾 적 카드덱</h2>
+      <div class="card-row" id="enemyCards"></div>
+    </div>
+
+    <!-- 내 카드 덱 -->
+    <div class="user-deck">
+      <h2>🧑‍💻 내 카드덱</h2>
+      <div class="card-row" id="userCards"></div>
+    </div>
+
+    <!-- 전투 시작 버튼 -->
+    <button id="startBattle">⚔️ 전투 시작</button>
+  </div>
+
+  <script>
+  document.addEventListener('DOMContentLoaded', async () => {
+    const params    = new URLSearchParams(window.location.search);
+    const userCards = JSON.parse(params.get('userCards') || '[]'); // [{…}]
+    const aiCards   = JSON.parse(params.get('aiCards')   || '[]'); // [{…}]
+    const order     = JSON.parse(params.get('order')     || '[]'); // ['3','1','7',…]
+
+    // 1) 내 카드 순서대로 재정렬
+    const orderedUser = order.map(id => userCards.find(c => String(c.id) === String(id)));
+
+    // 2) 덱 렌더 함수 (이미지+이름+주요 설명)
+    function renderDeck(containerId, cards) {
+      const container = document.getElementById(containerId);
+      container.innerHTML = '';  // 기존 초기화
+      cards.forEach(c => {
+        const box = document.createElement('div');
+        box.className = 'card';
+        box.style.backgroundImage = `url('${c.image}')`;
+        box.innerHTML = `
+          <div class="card-info">
+            <h3 class="card-name">${c.name}</h3>
+            <p class="card-main">${c.persona_main}</p>
+          </div>
+        `;
+        container.appendChild(box);
+      });
+    }
+
+    // 3) 렌더 호출
+    renderDeck('enemyCards', aiCards);
+    renderDeck('userCards', orderedUser);
+
+    // 4) 전투 시작
+    document.getElementById('startBattle')
+      .addEventListener('click', () => {
+        window.location.href = `fight.html${window.location.search}`;
+      });
+  });
+  </script>
+</body>
+</html>
