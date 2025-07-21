@@ -3,10 +3,20 @@ import json
 from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel, Field
 from typing import List, Optional
+from fastapi.middleware.cors import CORSMiddleware
+
 
 from judge import decide_winner
 
 app = FastAPI(title="Multi-Persona Battle API")
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],            
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 class CharacterInfo(BaseModel):
     name: str
