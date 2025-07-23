@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>말의 전장 – 시작하기</title>
+  <link rel="stylesheet" href="css/style.css"/>
+  <style>
+    html, body {
+      margin: 0; padding: 0;
+      width: 100%; height: 100%;
+      background:
+        url('assets/logo.png') no-repeat center top,
+        url('assets/logo.png') no-repeat center center;
+      background-size:
+        contain,   
+        cover;      
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    .onboard-container {
+      width: 90%;
+      max-width: 400px;
+      padding: 1.5rem 1rem;
+      text-align: center;
+    }
+
+    .onboard-container input {
+      width: 100%;
+      height: 55px;
+      margin-top: 100px;
+      padding: 0.75rem;
+      border-radius: 5px;
+      border: none;
+      font-size: 1rem;
+      margin-bottom: 1rem;
+      box-sizing: border-box;
+    }
+    .onboard-container button {
+      width: 100%;
+      padding: 0.750rem;
+      font-size: 1.1rem;
+      background: #d63447;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    .onboard-container button:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+  </style>
+</head>
+<body>
+  <div class="onboard-container">
+    <input
+      id="playerNameInput"
+      type="text"
+      placeholder="플레이어 이름을 입력하세요"
+    />
+    <button id="startBtn" disabled>게임 시작하기</button>
+  </div>
+
+  <script>
+    const nameInput = document.getElementById('playerNameInput');
+    const startBtn  = document.getElementById('startBtn');
+
+    nameInput.addEventListener('input', () => {
+      startBtn.disabled = nameInput.value.trim() === '';
+    });
+
+    startBtn.addEventListener('click', () => {
+      localStorage.setItem('playerName', nameInput.value.trim());
+      window.location.href = 'index.html';
+    });
+  </script>
+</body>
+</html>
