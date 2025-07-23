@@ -1,20 +1,27 @@
+// front/js/fight.js
 document.addEventListener('DOMContentLoaded', () => {
-  const params    = new URLSearchParams(window.location.search);
-  const userCards = JSON.parse(params.get('userCards') || '[]');
-  const aiCards   = JSON.parse(params.get('aiCards')   || '[]');
-  const order     = JSON.parse(params.get('order')     || '[]');
+  const params       = new URLSearchParams(window.location.search);
+  const userCards    = JSON.parse(params.get('userCards') || '[]');
+  const aiCards      = JSON.parse(params.get('aiCards')   || '[]');
+  const order        = JSON.parse(params.get('order')     || '[]');
+  const judgePrompt  = decodeURIComponent(params.get('judgePrompt') || '');
 
   // 1) 내 카드 순서대로 정렬
-  const orderedUser = order.map(id => userCards.find(c => String(c.id) === String(id)));
+  const orderedUser = order.map(id =>
+    userCards.find(c => String(c.id) === String(id))
+  );
 
   // 2) DOM 준비
   let userHP = 100, aiHP = 100;
-  const aiHpEl   = document.getElementById('aiHpDisplay');
-  const userHpEl = document.getElementById('userHpDisplay');
-  const enemyRow = document.getElementById('enemyRow');
-  const userRow  = document.getElementById('userRow');
+  const aiHpEl    = document.getElementById('aiHpDisplay');
+  const userHpEl  = document.getElementById('userHpDisplay');
+  const enemyRow  = document.getElementById('enemyRow');
+  const userRow   = document.getElementById('userRow');
+  const backdrop  = document.getElementById('modalBackdrop');
+  const modal     = document.getElementById('modal');
+  const loading   = document.getElementById('loadingBackdrop'); // 로딩 오버레이
 
-  // 3) 카드 렌더링
+  // 3) 카드 렌더링 함수
   function createCardEl(card) {
     const el = document.createElement('div');
     el.className = 'card';
@@ -24,8 +31,7 @@ document.addEventListener('DOMContentLoaded', () => {
       <div class="card-info">
         <h3>${card.name}</h3>
         <p>${card.persona_main}</p>
-      </div>
-    `;
+      </div>`;
     return el;
   }
 
@@ -41,28 +47,25 @@ document.addEventListener('DOMContentLoaded', () => {
   aiHpEl.textContent   = `HP: ${aiHP}`;
   userHpEl.textContent = `HP: ${userHP}`;
 
-  // 6) 모달 콤포넌트
-  const backdrop = document.getElementById('modalBackdrop');
-  const modal    = document.getElementById('modal');
+  // 6) 모달 표시 함수
   function showModal(text) {
     modal.innerHTML        = text + `<br><button id="nextBtn">다음</button>`;
     backdrop.style.display = 'flex';
     return new Promise(resolve => {
-      document.getElementById('nextBtn')
-        .addEventListener('click', () => {
-          backdrop.style.display = 'none';
-          resolve();
-        }, { once: true });
+      document.getElementById('nextBtn').addEventListener('click', () => {
+        backdrop.style.display = 'none';
+        resolve();
+      }, { once: true });
     });
   }
 
-  // 7) 열 단위 전투
+  // 7) 열 단위 전투 (GPT API 연동)
   async function runBattle() {
-    const eCards = Array.from(enemyRow.children);
-    const uCards = Array.from(userRow.children);
-
-    for (let i = 0; i < eCards.length; i++) {
-      const eEl = eCards[i], uEl = uCards[i];
+    for (let i = 0; i < order.length; i++) {
+      const userCard = orderedUser[i];
+      const aiCard   = aiCards[i];
+      const eEl      = enemyRow.children[i];
+      const uEl      = userRow.children[i];
 
       // (1) 애니메이션
       eEl.classList.add('attack');
@@ -71,31 +74,61 @@ document.addEventListener('DOMContentLoaded', () => {
       eEl.classList.remove('attack');
       uEl.classList.remove('defend');
 
-      // (2) 데미지 계산
-      const aiAtk = Number(eEl.dataset.attack);
-      const usAtk = Number(uEl.dataset.attack);
-      let resultText;
-      if (usAtk >= aiAtk) {
-        aiHP = Math.max(0, aiHP - usAtk);
-        aiHpEl.textContent = `HP: ${aiHP}`;
-        resultText = `라운드 ${i+1} 승리! (–${usAtk} HP)`;
-      } else {
-        userHP = Math.max(0, userHP - aiAtk);
-        userHpEl.textContent = `HP: ${userHP}`;
-        resultText = `라운드 ${i+1} 패배... (–${aiAtk} HP)`;
+      // (2) 로딩 오버레이 표시
+      loading.style.display = 'flex';
+
+      // (3) GPT 판단 요청
+      let winnerText = '';
+      try {
+        const res = await fetch('http://127.0.0.1:8000/api/battle', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            characters: [userCard, aiCard],
+            criteria: judgePrompt || "공정하고 객관적인 기준"
+          })
+        });
+        const data = await res.json();
+        winnerText = data.result;
+      } catch (err) {
+        console.error('GPT 판단 실패:', err);
+        winnerText = `승자: 알 수 없음\n이유: 네트워크 오류`;
       }
 
-      // (3) 팝업 & 다음 버튼 대기
-      await showModal(resultText);
+      // (4) 로딩 오버레이 숨기기
+      loading.style.display = 'none';
+
+      // (5) 응답 파싱 및 HP 갱신
+      const winMatch    = winnerText.match(/승자:\s*(.+)/);
+      const reasonMatch = winnerText.match(/이유:\s*([\s\S]+)/);
+      const winnerName  = winMatch    ? winMatch[1].trim()    : null;
+      const reason      = reasonMatch ? reasonMatch[1].trim() : '';
+      let damage = 0;
+
+      if (winnerName === userCard.name) {
+        damage  = userCard.attack_power;
+        aiHP    = Math.max(0, aiHP - damage);
+        aiHpEl.textContent = `HP: ${aiHP}`;
+      } else if (winnerName === aiCard.name) {
+        damage   = aiCard.attack_power;
+        userHP   = Math.max(0, userHP - damage);
+        userHpEl.textContent = `HP: ${userHP}`;
+      }
+
+      // (6) 팝업 표시
+      const popupText = 
+        `승자: ${winnerName || "없음"}<br>` +
+        `이유: ${reason}<br>` +
+        `– 데미지: ${damage} HP`;
+      await showModal(popupText);
     }
 
     // 8) 최종 결과 & 랭킹 보기 버튼
     let finalText = userHP > aiHP
-      ? '🎉 최종 승리!'
+      ? '최종 승리!'
       : userHP < aiHP
-        ? '😢 최종 패배...'
-        : '🤝 최종 무승부';
-    // 랭킹 보기 버튼
+        ? '최종 패배...'
+        : '무승부';
     backdrop.style.display = 'flex';
     modal.innerHTML = `
       ${finalText}<br>
