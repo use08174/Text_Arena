@@ -11,7 +11,7 @@ body {
 /* 반투명 컨테이너 */
 .container {
   background: rgba(0, 0, 0, 0.6);
-  max-width: 1100px;
+  max-width: 1500px;
   margin: 3rem auto;
   padding: 2rem;
   border-radius: 10px;
@@ -58,7 +58,7 @@ button:hover:not(:disabled) {
   gap: 1rem;
   flex-wrap: nowrap;
   overflow-x: auto;
-  margin: 1rem 0;
+  margin: 2rem 0;
   padding-bottom: 0.5rem;
 }
 
@@ -91,8 +91,8 @@ button:hover:not(:disabled) {
   background-color: #333;           /* 이미지 로딩 전 기본 색상 */
   border: 2px solid #d63447;
   border-radius: 8px;
-  width: 100px;
-  height: 140px;
+  width: 140px;
+  height: 200px;
   position: relative;               /* 오버레이용 */
   overflow: hidden;
   cursor: pointer;
@@ -105,7 +105,6 @@ button:hover:not(:disabled) {
   opacity: 0.9;
 }
 .card.selected {
-
   border-color: #ffffff;
 }
 
@@ -121,21 +120,21 @@ button:hover:not(:disabled) {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 0.25rem;
+  gap: rem;
 }
 .card-info .card-name,
 .card-info .card-main {
-  margin: 0;
+  margin: 2;
   color: #fff;
-  text-shadow: 0 0 5px rgba(0,0,0,0.7);
+  text-shadow: 0 0 10px rgba(0,0,0,0.7);
   text-align: center;
 }
 .card-info .card-name {
-  font-size: 0.95rem;
+  font-size: 1rem;
 }
 .card-info .card-main {
-  font-size: 0.75rem;
-  line-height: 1.2;
+  font-size: 0.8rem;
+  line-height: 1.4;
 }
 
 /* 카드 위쪽 중앙에 번호 배치하는 배지 */
