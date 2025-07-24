@@ -18,5 +18,5 @@ uvicorn app:app --reload
 ## 3. 프론트엔드 실행 (VSCode Live Server)
 
 1. VSCode에서 프로젝트 폴더 열기
-2. index.html 파일 우클릭 → "Open with Live Server" 선택
+2. onboarding.html 파일 우클릭 → "Open with Live Server" 선택
 
