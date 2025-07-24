@@ -1,6 +1,7 @@
 # 1. 가상환경
 venv/
 .venv/
+./text_arena
 
 # 2. Python 관련
 __pycache__/
