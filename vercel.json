@@ -17,6 +17,10 @@
       "dest": "app.py"
     },
     {
+      "src": "/",
+      "dest": "/front/onboarding.html" 
+    },
+    {
       "src": "/(.*)",
       "dest": "/front/$1"
     }
