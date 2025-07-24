@@ -6,7 +6,7 @@
       "use": "@vercel/static"
     },
     {
-      "src": "back/app.py",
+      "src": "app.py",
       "use": "@vercel/python",
       "config": { "maxDuration": 10 }
     }
@@ -14,7 +14,7 @@
   "routes": [
     {
       "src": "/api/(.*)",
-      "dest": "back/app.py"
+      "dest": "app.py"
     },
     {
       "src": "/(.*)",
