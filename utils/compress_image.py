@@ -8,7 +8,7 @@ def compress_image(image_path, output_path):
         img = Image.open(image_file)
         img = img.convert("RGB")
         output = io.BytesIO()
-        img.save(output, format="JPEG", quality=30)  # quality를 낮춰 압축 비율을 높임
+        img.save(output, format="JPEG", quality=80)  # quality를 낮춰 압축 비율을 높임
         with open(output_path, 'wb') as f:
             f.write(output.getvalue())  # 압축된 이미지 저장
 
@@ -26,7 +26,7 @@ def compress_images_in_folder(input_folder, output_folder):
             print(f"Compressed: {filename}")
 
 # 사용 예시
-input_folder = "../assets"  # 원본 이미지가 들어있는 폴더
+input_folder = "C:/Users/심수민/github/assets"  # 원본 이미지가 들어있는 폴더
 output_folder = "compressed_assets"  # 압축된 이미지를 저장할 폴더
 
 compress_images_in_folder(input_folder, output_folder)
