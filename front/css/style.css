@@ -16,6 +16,13 @@ body {
   color: #fff;
 }
 
+.welcome-text {
+    margin-top: 100px; /* 수치를 조정해서 아래로 내리기 */
+    margin-bottom: 0;
+    color: #fff;
+    font-size: 1.9rem;
+  }
+
 .index-body {
   margin: 0;
   padding: 0;
