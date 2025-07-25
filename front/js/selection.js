@@ -23,12 +23,15 @@ document.addEventListener('DOMContentLoaded', async () => {
     box.style.backgroundImage = `url('${c.image}')`;
 
     // 텍스트는 오버레이 정보 영역에만
+    // 기존 box.style.backgroundImage 지우고 innerHTML 만 아래처럼
     box.innerHTML = `
-      <div class="card-info">
-        <h4 class="card-name">${c.name}</h4>
-        <small class="card-main">${c.persona_main}</small>
+      <div class="card-thumbnail"
+          style="background-image: url('${c.image}')">
       </div>
+      <div class="card-name-box">${c.name}</div>
+      <div class="card-desc-box">${c.persona_main}</div>
     `;
+
 
     box.addEventListener('click', () => {
       if (selected.has(c.id)) {

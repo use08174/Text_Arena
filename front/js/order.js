@@ -33,18 +33,18 @@ document.addEventListener('DOMContentLoaded', async () => {
     const container = document.getElementById(containerId);
     container.innerHTML = ''; // 초기화
     cards.forEach(c => {
-      const cardEl = document.createElement('div');
-      cardEl.className = 'card';
-      cardEl.dataset.id = c.id;
-      cardEl.style.backgroundImage = `url('${c.image}')`;
-      cardEl.innerHTML = `
-        <div class="card-info">
-          <h3 class="card-name">${c.name}</h3>
-          <p class="card-main">${c.persona_main}</p>
-        </div>
-      `;
-      container.appendChild(cardEl);
-    });
+    const box = document.createElement('div');
+    box.className = 'card';
+    box.dataset.id = c.id;
+    box.innerHTML = `
+      <div class="card-thumbnail"
+           style="background-image: url('${c.image}')">
+      </div>
+      <div class="card-name-box">${c.name}</div>
+      <div class="card-desc-box">${c.persona_main}</div>
+    `;
+    container.appendChild(box);
+  });
   }
 
   // 6) 초기 렌더: AI / 내 카드

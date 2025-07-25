@@ -23,17 +23,19 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // 3) 카드 렌더링 함수
   function createCardEl(card) {
-    const el = document.createElement('div');
-    el.className = 'card';
-    el.style.backgroundImage = `url('${card.image}')`;
-    el.dataset.attack = card.attack_power;
-    el.innerHTML = `
-      <div class="card-info">
-        <h3>${card.name}</h3>
-        <p>${card.persona_main}</p>
-      </div>`;
-    return el;
-  }
+  const el = document.createElement('div');
+  el.className = 'card';
+  el.dataset.attack = card.attack_power;
+  el.innerHTML = `
+    <div class="card-thumbnail"
+         style="background-image: url('${card.image}')">
+    </div>
+    <div class="card-name-box">${card.name}</div>
+    <div class="card-desc-box">${card.persona_main}</div>
+  `;
+  return el;
+}
+
 
   // 4) ROW 채우기
   enemyRow.innerHTML = '';

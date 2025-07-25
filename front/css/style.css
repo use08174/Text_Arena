@@ -1,13 +1,21 @@
 /* 전체 배경 & 기본 폰트 */
+@font-face {
+  font-family: 'DanjoBold';
+  src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2307-1@1.1/Danjo-bold-Regular.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+}
+html, body {
+  font-family: 'DanjoBold', sans-serif;
+}
 body {
   margin: 0;
   padding: 0;
   background: url('https://images.unsplash.com/photo-1599409132382-21ba6c90c8ac?fit=crop&w=1200&q=80') center/cover no-repeat;
   height: 100vh;
   color: #fff;
-  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
-/* index.html 전용 RPG 배경 */
+
 .index-body {
   margin: 0;
   padding: 0;
@@ -18,10 +26,8 @@ body {
 
   color: #ffbb00;
   font-size: larger;
-  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
 
-/* index.html 전용 RPG 배경 */
 .battle-body {
   margin: 0;
   padding: 0;
@@ -32,7 +38,6 @@ body {
 
   color: #ffffff;
   font-size: larger;
-  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
 
 
@@ -108,20 +113,18 @@ button:hover:not(:disabled) {
   margin-left: 25px;
 }
 
-/* 카드 박스 공통 (이미지를 배경으로 가득 채움) */
+/* 카드 박스 공통 */
 .card {
-  background-color: #333;           /* 이미지 로딩 전 기본 색상 */
-  border: 2px solid #d63447;
-  border-radius: 8px;
-  width: 140px;
-  height: 200px;
-  position: relative;               /* 오버레이용 */
+  display: flex;
+  position: relative; 
+  flex-direction: column;
   overflow: hidden;
+  border: 2px solid #d63447;    
+  border-radius: 8px;
+  width: 150px;
+  height: 210px;
   cursor: pointer;
-  transition: transform 0.2s ease, background-color 0.2s ease;
-  background-size: cover;           /* 배경 이미지가 카드 전체를 채우도록 */
-  background-position: center;      /* 중앙 기준으로 크롭 */
-  background-repeat: no-repeat;
+  transition: transform 0.2s ease;
 }
 .card:hover {
   opacity: 0.9;
@@ -130,33 +133,34 @@ button:hover:not(:disabled) {
   border-color: #ffffff;
 }
 
-/* 카드 텍스트 오버레이 */
-.card-info {
-  position: absolute;
-  bottom: 0;
-  left: 0;
+/* 1) 썸네일 이미지  */
+.card-thumbnail {
+  flex: 2.5;
+  background-size: cover;
+  background-position: center 8%;
+  background-repeat: no-repeat;
   width: 100%;
-  padding: 0.5rem;
-  background: linear-gradient(0deg, rgba(0,0,0,0.8), transparent);
-  box-sizing: border-box;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  min-height: 60px; 
 }
-.card-info .card-name,
-.card-info .card-main {
-  margin: 2;
-  color: #fff;
-  text-shadow: 0 0 10px rgba(0,0,0,0.7);
+
+/* 2) 이름 박스 */
+.card-name-box {
+  background: #d63447;
+  color: #000000;
   text-align: center;
-}
-.card-info .card-name {
+  padding: 0.3rem;
   font-size: 1rem;
 }
-.card-info .card-main {
-  font-size: 0.8rem;
-  line-height: 1.4;
+
+/* 3) 설명 박스 */
+.card-desc-box {
+  flex: 1;
+  background: #ffffff;
+  color: #000;
+  text-align: center;
+  font-size: 0.9rem;
+  line-height: 1.2;
+  padding: 0.3rem;
+  box-sizing: border-box;
 }
 
 /* 카드 위쪽 중앙에 번호 배치하는 배지 */
@@ -194,7 +198,7 @@ button:hover:not(:disabled) {
   box-sizing: border-box;
 }
 .judge-section h2 {
-  margin-left: 3.9rem;  /* 2번 타이틀과 같은 위치로 맞춰줌 */
+  margin-left: 3.9rem; 
   margin-bottom: 0.5rem;
 }
 
