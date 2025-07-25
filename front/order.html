@@ -6,24 +6,26 @@
   <title>순서 재배열 &amp; 심판 프롬프트</title>
   <link rel="stylesheet" href="css/style.css"/>
 </head>
-<body>
+<body class="index-body">
   <div class="container">
-
+    
     <!-- 적 카드 덱 -->
     <div class="enemy-deck">
-      <h2>👾 적 카드</h2>
+      <h2>1. AI 적 카드</h2>
       <div id="aiCards" class="card-row"></div>
     </div>
+    <h1>내 카드 순서를 정하세요 (클릭한 순서대로)</h1>
 
     <!-- 내 카드 덱 -->
     <div class="user-deck">
-      <h2>🧑‍💻 내 카드</h2>
+      
+      <h2>2. 내 카드</h2>
       <div id="myCards" class="card-row"></div>
     </div>
 
     <!-- 심판 프롬프트 -->
     <div class="judge-section">
-      <label for="judgeInput"><strong>심판 프롬프트</strong></label>
+      <h2>3. 심판 프롬프트 (승패 결정 요인을 작성해주세요.)</h2>
       <textarea id="judgeInput" rows="8"
         placeholder="예) 더 웃긴 사람이 이기는 걸로 해줘, 더 귀여운 사람이 이기는 걸로 해줘"></textarea>
     </div>

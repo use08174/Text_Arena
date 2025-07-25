@@ -7,13 +7,41 @@ body {
   color: #fff;
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
+/* index.html 전용 RPG 배경 */
+.index-body {
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+
+  background: url('../assets/index.png') center/cover no-repeat;
+  background-attachment: fixed;
+
+  color: #ffbb00;
+  font-size: larger;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* index.html 전용 RPG 배경 */
+.battle-body {
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+
+  background: url('../assets/index.png') center/cover no-repeat;
+  background-attachment: fixed;
+
+  color: #ffffff;
+  font-size: larger;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
 
 /* 반투명 컨테이너 */
 .container {
   background: rgba(0, 0, 0, 0.6);
   max-width: 1500px;
   margin: 3rem auto;
-  padding: 2rem;
+  padding: 0.5rem;
   border-radius: 10px;
   box-shadow: 0 0 20px #000;
 }
@@ -23,16 +51,7 @@ h1 {
   margin-bottom: 1.5rem;
 }
 
-/* 공통 버튼/입력 스타일 */
-textarea {
-  width: 100%;
-  font-size: 1rem;
-  padding: 0.75rem;
-  border-radius: 5px;
-  border: none;
-  resize: none;
-  margin-top: 1rem;
-}
+
 button {
   width: 100%;
   margin-top: 0.5rem;
@@ -72,18 +91,21 @@ button:hover:not(:disabled) {
 
 .enemy-deck,
 .user-deck {
-  margin-right: 7rem;
+  margin-right: 10rem;
   margin-left: 4rem;
   flex-shrink: 0;
   display: flex;
-  align-items: center;
-  margin-top: 1rem;
+  align-items: center; 
 }
 
-.enemy-deck .card-row,
+.enemy-deck .card-row{
+  flex: 1;
+  justify-content: center;
+}
 .user-deck .card-row {
   flex: 1;
   justify-content: center;
+  margin-left: 25px;
 }
 
 /* 카드 박스 공통 (이미지를 배경으로 가득 채움) */
@@ -120,7 +142,7 @@ button:hover:not(:disabled) {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: rem;
+  min-height: 60px; 
 }
 .card-info .card-name,
 .card-info .card-main {
@@ -160,12 +182,30 @@ button:hover:not(:disabled) {
   font-size: 25px;
 }
 .judge-section textarea {
-  width: 100%;
+  width: 1350px;
+  max-width: 100%;
+  font-size: 1rem;
+  padding: 0.75rem;
+  border-radius: 5px;
+  border: none;
+  resize: none;
+  margin: 1rem auto 0 auto;
+  display: block;
   box-sizing: border-box;
+}
+.judge-section h2 {
+  margin-left: 3.9rem;  /* 2번 타이틀과 같은 위치로 맞춰줌 */
+  margin-bottom: 0.5rem;
 }
 
 #toBattle {
-  margin-top: 0.5rem;
+  width: 1350px;
+  max-width: 100%;
+  font-size: 1.5rem;
+  border-radius: 5px;
+  margin: 1rem auto 0 auto;
+  display: block;
+  box-sizing: border-box;
 }
 
 .fight-container .card-row {
