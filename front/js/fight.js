@@ -80,7 +80,7 @@ document.addEventListener('DOMContentLoaded', () => {
       // (3) GPT 판단 요청
       let winnerText = '';
       try {
-        const res = await fetch('https://text-arena-seven.vercel.app/api/battle', {
+        const res = await fetch('/api/battle', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({

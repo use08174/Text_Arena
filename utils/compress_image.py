@@ -26,7 +26,7 @@ def compress_images_in_folder(input_folder, output_folder):
             print(f"Compressed: {filename}")
 
 # 사용 예시
-input_folder = "C:/Users/심수민/github/assets"  # 원본 이미지가 들어있는 폴더
+input_folder = ".../assets"  # 원본 이미지가 들어있는 폴더
 output_folder = "compressed_assets"  # 압축된 이미지를 저장할 폴더
 
 compress_images_in_folder(input_folder, output_folder)
