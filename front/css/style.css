@@ -80,7 +80,8 @@ button:hover:not(:disabled) {
 
 /* 카드 줄 공통 */
 .card-row {
-  display: flex;
+  display: grid;
+   grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
   gap: 1rem;
   flex-wrap: wrap; /* 수정됨: 줄바꿈 허용 */
   justify-content: center; /* 가운데 정렬 추가 */
@@ -278,7 +279,7 @@ button:hover:not(:disabled) {
 
 @media (max-width: 480px) {
   #cardGrid {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(3, 1fr);
   }
 
   .card {
