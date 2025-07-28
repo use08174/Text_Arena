@@ -39,6 +39,7 @@
       position:absolute; /* container 내부에 한정 */
       top:0; left:0; width:100%; height:100%;
       display:none; justify-content:center; align-items:center;
+      background:rgba(0,0,0,0.5); z-index:100;
       padding:1rem; box-sizing:border-box;
     }
     .modal {
@@ -61,6 +62,12 @@
     @keyframes spin {
       to { transform: rotate(360deg); }
     }
+    /* 모바일에서는 배경 제거 */
+    @media (max-width: 500px) {
+      .modal-backdrop {
+        background: transparent;
+      }
+}
   </style>
 </head>
 <body class="battle-body">
