@@ -305,16 +305,21 @@ button:hover:not(:disabled) {
     max-width: calc(33.333% - 1rem);
     width: auto;  /* 고정 150px 대신 비율로 */
   }
+   .card-row {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.75rem; /* 카드 간 간격 */
+    padding: 0 0.5rem;  /* 좌우 패딩 추가로 전체 너비 조절 */
+    box-sizing: border-box;
+  }
 
   .card {
-    /* order.html 카드 너비 override */
-    width: 100%;
+    flex: 0 0 calc((100% - 2 * 0.75rem - 2 * 0.5rem) / 3); 
+    max-width: calc((100% - 2 * 0.75rem - 2 * 0.5rem) / 3);
+    box-sizing: border-box;
     height: auto;
   }
-  .card-row {
-  overflow-x: hidden;
-  }
-
 
   .card-name-box,
   .card-desc-box {
