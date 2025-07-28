@@ -305,18 +305,21 @@ button:hover:not(:disabled) {
     max-width: calc(33.333% - 1rem);
     width: auto;  /* 고정 150px 대신 비율로 */
   }
-   .card-row {
+  .card-row {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    gap: 0.75rem; /* 카드 간 간격 */
-    padding: 0 0.5rem;  /* 좌우 패딩 추가로 전체 너비 조절 */
+    gap: 1rem;
+    padding: 0;
+    margin: 0 auto;
     box-sizing: border-box;
+    overflow-x: hidden;  /* 스크롤 제거 */
+    max-width: 100%;
   }
 
   .card {
-    flex: 0 0 calc((100% - 2 * 0.75rem - 2 * 0.5rem) / 3); 
-    max-width: calc((100% - 2 * 0.75rem - 2 * 0.5rem) / 3);
+    flex: 0 0 calc((100% - 2rem) / 3);  /* 3개 + gap 2개 = 2rem */
+    max-width: calc((100% - 2rem) / 3);
     box-sizing: border-box;
     height: auto;
   }
