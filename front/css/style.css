@@ -396,30 +396,34 @@ button:hover:not(:disabled) {
     gap: 1rem;
     padding: 0.5rem;
     box-sizing: border-box;
-    overflow-x: hidden;
     max-width: 100%;
   }
-
   .fight-container .card-row {
-    display: grid;
-    grid-template-columns: repeat(5, 1fr); /* 💡 한 줄에 5개 고정 */
-    gap: 0.4rem;
-    width: 100%;
-    padding: 0;
-    margin: 0;
-    box-sizing: border-box;
-    justify-items: center;
-  }
+  display: flex;
+  justify-content: center;
+  gap: 0.4rem;
+  width: 100%;
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  overflow: visible;
+}
 
-  .fight-container .card {
-    width: 100%;
-    aspect-ratio: 10 / 14;
-    max-height: 90px;  /* 카드 크기 제한 */
-    height: auto;
-    box-sizing: border-box;
-    transform: none !important;
-    margin: 0;
-  }
+.fight-container .card {
+  flex: 0 0 18%;        
+  aspect-ratio: 10 / 14;
+  height: auto;
+  box-sizing: border-box;
+  transition: transform 0.3s ease;  
+}
+  .card.attack {
+  transform: translateY(30px);
+}
+
+.card.defend {
+  transform: translateY(-30px);
+}
+
 
   .card-name-box,
   .card-desc-box {
