@@ -9,8 +9,8 @@ html, body {
   font-family: 'DanjoBold', sans-serif;
 }
 body {
-  margin: 0;
-  padding: 0;
+  margin: auto;
+  padding: auto;
   background: url('https://images.unsplash.com/photo-1599409132382-21ba6c90c8ac?fit=crop&w=1200&q=80') center/cover no-repeat;
   height: 100vh;
   color: #fff;
@@ -74,6 +74,17 @@ button:hover:not(:disabled) {
   background: #a82c37;
 }
 
+#nextBtn {
+  width: 1750px;
+  max-width: 100%;
+  font-size: 1.5rem;
+  border-radius: 5px;
+  margin: 1rem auto 0 auto;
+  display: block;
+  box-sizing: border-box;
+}
+
+
 /* 카드 줄 공통 */
 .card-row {
   display: flex;
@@ -92,6 +103,7 @@ button:hover:not(:disabled) {
   display: grid;
   grid-template-columns: repeat(7, 1fr);
   justify-items: center;
+  justify-content: space-around;
   gap: 0.8rem; 
   padding: 1rem;
 }
@@ -334,7 +346,7 @@ button:hover:not(:disabled) {
   }
 }
 
-@media (max-width: 400px) {
+@media (max-width: 500px) {
   /* index.html 전용 그리드 */
   #cardGrid {
     grid-template-columns: repeat(3, 1fr);
@@ -357,11 +369,11 @@ button:hover:not(:disabled) {
   }
 
   .card {
-    width: 90%;
+    width: 80%;
   }
 
   h1 {
-    font-size: 1.4rem;
+    font-size: 1.6rem;
   }
 
   .welcome-text {
