@@ -347,6 +347,24 @@ button:hover:not(:disabled) {
 }
 
 @media (max-width: 500px) {
+   .container {
+    background: none !important;  /* ✅ 모바일일 때 배경 제거 */
+    box-shadow: none !important;  /* 필요하다면 그림자도 제거 */
+  }
+
+  .fight-container {
+    background: none !important;
+  }
+  .judge-section {
+    background: none !important;
+    box-shadow: none !important;
+  }
+   /* 혹시 popup-overlay 스타일도 있다면 추가 */
+  .popup-overlay {
+    background-color: transparent !important;
+    box-shadow: none !important;
+  }
+
   /* index.html 전용 그리드 */
   #cardGrid {
     grid-template-columns: repeat(3, 1fr);
@@ -411,9 +429,8 @@ button:hover:not(:disabled) {
   }
 
   .fight-container .card {
-    width: 100%;
-    aspect-ratio: 10 / 14;
-    max-height: 90px;  /* 카드 크기 제한 */
+    width: 60px;                  /* 모바일에서 작게 */
+    max-width: 100px;
     height: auto;
     box-sizing: border-box;
     transition: transform 0.3s ease;
@@ -431,5 +448,5 @@ button:hover:not(:disabled) {
   .card-name-box,
   .card-desc-box {
     font-size: 0.65rem;
-  }
+  } 
 }
