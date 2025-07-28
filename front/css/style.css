@@ -136,10 +136,10 @@ button:hover:not(:disabled) {
   overflow: hidden;
   border: 2px solid #d63447;
   border-radius: 8px;
-  width: 150px;
-  min-width: 120px; 
+  width: 145px;
+  min-width: 110px; 
   aspect-ratio: 10 / 14;
-  height: 210px;
+  height: 205px;
   cursor: pointer;
   transition: transform 0.2s ease;
 }
