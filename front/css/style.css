@@ -92,8 +92,10 @@ button:hover:not(:disabled) {
   display: grid;
   grid-template-columns: repeat(7, 1fr);
   justify-items: center;
+  gap: 0.8rem; 
   padding: 1rem;
 }
+
 
 
 .enemy-deck,
@@ -306,9 +308,13 @@ button:hover:not(:disabled) {
 
   .card {
     /* order.html 카드 너비 override */
-    width: 45%;
+    width: 100%;
     height: auto;
   }
+  .card-row {
+  overflow-x: hidden;
+  }
+
 
   .card-name-box,
   .card-desc-box {
