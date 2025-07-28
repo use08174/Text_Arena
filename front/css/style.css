@@ -17,20 +17,18 @@ body {
 }
 
 .welcome-text {
-    margin-top: 100px; /* 수치를 조정해서 아래로 내리기 */
-    margin-bottom: 0;
-    color: #fff;
-    font-size: 1.9rem;
-  }
+  margin-top: 100px;
+  margin-bottom: 0;
+  color: #fff;
+  font-size: 1.9rem;
+}
 
 .index-body {
   margin: 0;
   padding: 0;
   height: 100vh;
-
   background: url('../assets/index.png') center/cover no-repeat;
   background-attachment: fixed;
-
   color: #ffbb00;
   font-size: larger;
 }
@@ -39,19 +37,17 @@ body {
   margin: 0;
   padding: 0;
   height: 100vh;
-
   background: url('../assets/index.png') center/cover no-repeat;
   background-attachment: fixed;
-
   color: #ffffff;
   font-size: larger;
 }
-
 
 /* 반투명 컨테이너 */
 .container {
   background: rgba(0, 0, 0, 0.6);
   max-width: 1500px;
+  width: 90%; /* 추가 */
   margin: 3rem auto;
   padding: 0.5rem;
   border-radius: 10px;
@@ -62,7 +58,6 @@ h1 {
   text-align: center;
   margin-bottom: 1.5rem;
 }
-
 
 button {
   width: 100%;
@@ -87,10 +82,11 @@ button:hover:not(:disabled) {
 .card-row {
   display: flex;
   gap: 1rem;
-  flex-wrap: nowrap;
-  overflow-x: auto;
+  flex-wrap: wrap; /* 수정됨: 줄바꿈 허용 */
+  justify-content: center; /* 가운데 정렬 추가 */
   margin: 2rem 0;
   padding-bottom: 0.5rem;
+  overflow-x: auto;
 }
 
 /* index.html 전용: 20장 → 7 / 7 / 6 그리드 배치 */
@@ -107,10 +103,10 @@ button:hover:not(:disabled) {
   margin-left: 4rem;
   flex-shrink: 0;
   display: flex;
-  align-items: center; 
+  align-items: center;
 }
 
-.enemy-deck .card-row{
+.enemy-deck .card-row {
   flex: 1;
   justify-content: center;
 }
@@ -123,12 +119,14 @@ button:hover:not(:disabled) {
 /* 카드 박스 공통 */
 .card {
   display: flex;
-  position: relative; 
+  position: relative;
   flex-direction: column;
   overflow: hidden;
-  border: 2px solid #d63447;    
+  border: 2px solid #d63447;
   border-radius: 8px;
   width: 150px;
+  min-width: 120px; 
+  aspect-ratio: 10 / 14;
   height: 210px;
   cursor: pointer;
   transition: transform 0.2s ease;
@@ -140,7 +138,7 @@ button:hover:not(:disabled) {
   border-color: #ffffff;
 }
 
-/* 1) 썸네일 이미지  */
+/* 썸네일 이미지 */
 .card-thumbnail {
   flex: 2.5;
   background-size: cover;
@@ -149,7 +147,7 @@ button:hover:not(:disabled) {
   width: 100%;
 }
 
-/* 2) 이름 박스 */
+/* 이름 박스 */
 .card-name-box {
   background: #d63447;
   color: #000000;
@@ -158,7 +156,7 @@ button:hover:not(:disabled) {
   font-size: 1rem;
 }
 
-/* 3) 설명 박스 */
+/* 설명 박스 */
 .card-desc-box {
   flex: 1;
   background: #ffffff;
@@ -205,7 +203,7 @@ button:hover:not(:disabled) {
   box-sizing: border-box;
 }
 .judge-section h2 {
-  margin-left: 3.9rem; 
+  margin-left: 3.9rem;
   margin-bottom: 0.5rem;
 }
 
@@ -223,7 +221,6 @@ button:hover:not(:disabled) {
   overflow-x: visible;
   gap: 1rem;
 }
-
 .fight-container .card.attack {
   transform: translateY(50px);
 }
@@ -232,4 +229,76 @@ button:hover:not(:disabled) {
 }
 .fight-container .card.defend {
   transform: translateY(-30px);
+}
+
+/* ===== 반응형 미디어 쿼리 ===== */
+
+@media (max-width: 1200px) {
+  .card {
+    width: 130px;
+  }
+
+  .enemy-deck,
+  .user-deck {
+    margin: 0 2rem;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .judge-section textarea,
+  #toBattle {
+    width: 100%;
+  }
+
+  .judge-section h2 {
+    margin-left: 1rem;
+  }
+}
+
+@media (max-width: 768px) {
+  #cardGrid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .card {
+    width: 45%;
+    height: auto;
+  }
+
+  .card-name-box,
+  .card-desc-box {
+    font-size: 0.85rem;
+  }
+
+  .judge-section textarea {
+    width: 95%;
+  }
+}
+
+@media (max-width: 480px) {
+  #cardGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .card {
+    width: 90%;
+  }
+
+  h1 {
+    font-size: 1.5rem;
+  }
+
+  .welcome-text {
+    font-size: 1.2rem;
+    margin-top: 2rem;
+  }
+
+  .judge-section h2 {
+    font-size: 1.1rem;
+  }
+
+  .judge-section textarea,
+  #toBattle {
+    font-size: 1rem;
+  }
 }
