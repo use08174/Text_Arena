@@ -398,24 +398,27 @@ button:hover:not(:disabled) {
     box-sizing: border-box;
     max-width: 100%;
   }
-  .fight-container .card-row {
-  display: flex;
-  justify-content: center;
-  gap: 0.4rem;
-  width: 100%;
-  padding: 0;
-  margin: 0;
-  box-sizing: border-box;
-  overflow: visible;
-}
 
-.fight-container .card {
-  flex: 0 0 18%;        
-  aspect-ratio: 10 / 14;
-  height: auto;
-  box-sizing: border-box;
-  transition: transform 0.3s ease;  
-}
+  .fight-container .card-row {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr); /* 💡 한 줄에 5개 고정 */
+    gap: 0.4rem;
+    width: 100%;
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    justify-items: center;
+  }
+
+  .fight-container .card {
+    width: 100%;
+    aspect-ratio: 10 / 14;
+    max-height: 90px;  /* 카드 크기 제한 */
+    height: auto;
+    box-sizing: border-box;
+    transition: transform 0.3s ease;
+    margin: 0;
+  }
   .card.attack {
   transform: translateY(30px);
 }
