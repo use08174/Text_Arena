@@ -389,21 +389,40 @@ button:hover:not(:disabled) {
   #toBattle {
     font-size: 1rem;
   }
-
-  /* fight.html 전용: 5×2 그리드 */
-  .fight-container {
-    display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    gap: 0.5rem;
+    .fight-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
     padding: 0.5rem;
+    box-sizing: border-box;
+    overflow-x: hidden;
+    max-width: 100%;
   }
-  .fight-container .row,
-  .fight-container .row .card-row {
-    display: contents;
+
+  .fight-container .card-row {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr); /* 💡 한 줄에 5개 고정 */
+    gap: 0.4rem;
+    width: 100%;
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    justify-items: center;
   }
+
   .fight-container .card {
     width: 100%;
-    margin: 0;
+    aspect-ratio: 10 / 14;
+    max-height: 90px;  /* 카드 크기 제한 */
+    height: auto;
+    box-sizing: border-box;
     transform: none !important;
+    margin: 0;
+  }
+
+  .card-name-box,
+  .card-desc-box {
+    font-size: 0.65rem;
   }
 }
