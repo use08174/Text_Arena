@@ -348,8 +348,8 @@ button:hover:not(:disabled) {
 
 @media (max-width: 500px) {
    .container {
-    background: none !important;  /* ✅ 모바일일 때 배경 제거 */
-    box-shadow: none !important;  /* 필요하다면 그림자도 제거 */
+    background: none !important;  
+    box-shadow: none !important; 
   }
 
   .fight-container {
@@ -359,11 +359,7 @@ button:hover:not(:disabled) {
     background: none !important;
     box-shadow: none !important;
   }
-   /* 혹시 popup-overlay 스타일도 있다면 추가 */
-  .popup-overlay {
-    background-color: transparent !important;
-    box-shadow: none !important;
-  }
+
 
   /* index.html 전용 그리드 */
   #cardGrid {
@@ -408,6 +404,7 @@ button:hover:not(:disabled) {
     font-size: 1rem;
   }
     .fight-container {
+    margin-left: 50px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -415,26 +412,26 @@ button:hover:not(:disabled) {
     padding: 0.5rem;
     box-sizing: border-box;
     max-width: 100%;
+    width: 100%;     
   }
 
   .fight-container .card-row {
     display: grid;
-    grid-template-columns: repeat(5, 1fr); /* 💡 한 줄에 5개 고정 */
+    grid-template-columns: repeat(5, 1fr); /* 한 줄에 5개 고정 */
     gap: 0.4rem;
     width: 100%;
     padding: 0;
-    margin: 0;
+    margin: auto;
     box-sizing: border-box;
     justify-items: center;
   }
 
   .fight-container .card {
-    width: 60px;                  /* 모바일에서 작게 */
-    max-width: 100px;
+    width: 50px;                  /* 모바일에서 작게 */
     height: auto;
     box-sizing: border-box;
     transition: transform 0.3s ease;
-    margin: 0;
+ 
   }
   .card.attack {
   transform: translateY(30px);
