@@ -110,10 +110,25 @@ document.addEventListener('DOMContentLoaded', () => {
         damage  = userCard.attack_power;
         aiHP    = Math.max(0, aiHP - damage);
         aiHpEl.textContent = `HP: ${aiHP}`;
-      } else if (winnerName === aiCard.name) {
+
+        aiHpEl.classList.add('hp-flash-red');     // AI HP 빨강 깜빡
+        userHpEl.classList.add('hp-flash-green'); // 내 HP 초록 깜빡
+        setTimeout(() => {
+          aiHpEl.classList.remove('hp-flash-red');
+          userHpEl.classList.remove('hp-flash-green');
+        }, 600);
+      } 
+      else if (winnerName === aiCard.name) {
         damage   = aiCard.attack_power;
         userHP   = Math.max(0, userHP - damage);
         userHpEl.textContent = `HP: ${userHP}`;
+      
+        userHpEl.classList.add('hp-flash-red');     // 내 HP 빨강 깜빡
+        aiHpEl.classList.add('hp-flash-green');     // AI HP 초록 깜빡
+        setTimeout(() => {
+          userHpEl.classList.remove('hp-flash-red');
+          aiHpEl.classList.remove('hp-flash-green');
+        }, 600);
       }
 
       // (6) 팝업 표시
