@@ -251,6 +251,66 @@ button:hover:not(:disabled) {
   display: block;
   box-sizing: border-box;
 }
+/* 팝업창 세로 길이 제한 & 내부 스크롤 */
+#modal {
+  max-height: 25vh;    /* 뷰포트 높이의 25%만 사용 */
+  overflow-y: auto;    /* 내용이 많으면 내부만 스크롤 */
+  /* (선택) 가로너비도 카드 5장폭에 맞추고 싶으면 아래 두 줄 추가 */
+  width: fit-content;
+  max-width: calc(5 * 130px + 4 * 1rem);
+}
+.hp-group {
+  display: flex;
+  flex-direction: column;  /* 위→아래 순서 */
+  align-items: flex-start; /* 왼쪽 정렬 */
+  gap: 0.25rem;            /* 레이블↔박스 사이 간격 */
+}
+
+
+/* 덱 라벨 크기·색상 조정 */
+.deck-label {
+  margin: 0;           /* h3 기본 마진 제거 */
+  font-size: 1.5rem;
+  color: #fff;
+  white-space: nowrap;
+}
+
+/* 1. HP 표시 박스 스타일 */
+#aiHpDisplay,
+#userHpDisplay {
+  display: inline-block;
+  background: rgba(255, 255, 255, 0.8);
+  color: #000;
+    align-items: center;          /* 수직 중앙 정렬 */
+  justify-content: center;      /* 수평 중앙 정렬 */
+  padding: 0.5rem 1.3rem;
+  border-radius: 4px;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+}
+
+/* 2. 플래시 애니메이션 정의 */
+@keyframes flashRed {
+  0%   { background-color: rgba(255,255,255,0.8); }
+  50%  { background-color: #f8d7da; }
+  100% { background-color: rgba(255,255,255,0.8); }
+}
+@keyframes flashGreen {
+  0%   { background-color: rgba(255,255,255,0.8); }
+  50%  { background-color: #d4edda; }
+  100% { background-color: rgba(255,255,255,0.8); }
+}
+
+/* 3. 플래시용 클래스 */
+.hp-flash-red {
+  animation: flashRed 0.6s forwards;
+}
+.hp-flash-green {
+  animation: flashGreen 0.6s forwards;
+}
+
+
+
 
 /* ===== 반응형 미디어 쿼리 ===== */
 
