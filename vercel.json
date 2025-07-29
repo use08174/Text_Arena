@@ -1,5 +1,10 @@
 {
   "version": 2,
+  "functions": {
+    "api/*.js": {
+      "runtime": "nodejs18.x"
+    }
+  },
   "builds": [
     {
       "src": "front/**/*",
@@ -13,12 +18,16 @@
   ],
   "routes": [
     {
+      "src": "/api/savePlayer",
+      "dest": "/api/savePlayer.js"
+    },
+    {
       "src": "/api/(.*)",
       "dest": "app.py"
     },
     {
       "src": "/",
-      "dest": "/front/onboarding.html" 
+      "dest": "/front/onboarding.html"
     },
     {
       "src": "/(.*)",
