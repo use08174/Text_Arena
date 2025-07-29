@@ -1,18 +1,14 @@
 {
   "version": 2,
-  "functions": {
-    "api/*.js": {
-      "runtime": "nodejs18.x"
-    }
-  },
   "builds": [
-    { "src": "front/**/*", "use": "@vercel/static" },
-    { "src": "app.py", "use": "@vercel/python" }
+    { "src": "front/**/*",    "use": "@vercel/static" },
+    { "src": "api/**/*.js",   "use": "@vercel/node" },
+    { "src": "app.py",        "use": "@vercel/python" }
   ],
   "routes": [
-    { "src": "/api/savePlayer", "dest": "api/savePlayer.js" },
-    { "src": "/api/(.*)", "dest": "app.py" },
-    { "src": "/", "dest": "/front/onboarding.html" },
-    { "src": "/(.*)", "dest": "/front/$1" }
+    { "src": "/api/savePlayer", "dest": "/api/savePlayer.js" },
+    { "src": "/api/(.*)",       "dest": "/app.py" },
+    { "src": "/",               "dest": "/front/onboarding.html" },
+    { "src": "/(.*)",           "dest": "/front/$1" }
   ]
 }
