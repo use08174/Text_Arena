@@ -1,10 +1,10 @@
 // front/js/fight.js
 document.addEventListener('DOMContentLoaded', () => {
-  const params       = new URLSearchParams(window.location.search);
-  const userCards    = JSON.parse(params.get('userCards') || '[]');
-  const aiCards      = JSON.parse(params.get('aiCards')   || '[]');
-  const order        = JSON.parse(params.get('order')     || '[]');
-  const judgePrompt  = decodeURIComponent(params.get('judgePrompt') || '');
+  const params      = new URLSearchParams(window.location.search);
+  const userCards   = JSON.parse(params.get('userCards') || '[]');
+  const aiCards     = JSON.parse(params.get('aiCards')   || '[]');
+  const order       = JSON.parse(params.get('order')     || '[]');
+  const judgePrompt = decodeURIComponent(params.get('judgePrompt') || '');
 
   // 1) 내 카드 순서대로 정렬
   const orderedUser = order.map(id =>
@@ -23,27 +23,26 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // 3) 카드 렌더링 함수
   function createCardEl(card) {
-  const el = document.createElement('div');
-  el.className = 'card';
-  el.dataset.attack = card.attack_power;
-  el.innerHTML = `
-    <div class="card-thumbnail"
-         style="background-image: url('${card.image}')">
-    </div>
-    <div class="card-name-box">${card.name}</div>
-    <div class="card-desc-box">${card.persona_main}</div>
-  `;
-  return el;
-}
-
+    const el = document.createElement('div');
+    el.className = 'card';
+    el.dataset.attack = card.attack_power;
+    el.innerHTML = `
+      <div class="card-thumbnail"
+           style="background-image: url('${card.image}')">
+      </div>
+      <div class="card-name-box">${card.name}</div>
+      <div class="card-desc-box">${card.persona_main}</div>
+    `;
+    return el;
+  }
 
   // 4) ROW 채우기
   enemyRow.innerHTML = '';
   userRow.innerHTML  = '';
-  for (let i = 0; i < order.length; i++) {
+  order.forEach((_, i) => {
     enemyRow.appendChild(createCardEl(aiCards[i]));
     userRow.appendChild(createCardEl(orderedUser[i]));
-  }
+  });
 
   // 5) 초기 HP 표시
   aiHpEl.textContent   = `HP: ${aiHP}`;
@@ -82,7 +81,7 @@ document.addEventListener('DOMContentLoaded', () => {
       // (3) GPT 판단 요청
       let winnerText = '';
       try {
-        const res = await fetch('https://text-arena-seven.vercel.app/api/battle', {
+        const res = await fetch('/api/battle', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
@@ -118,12 +117,31 @@ document.addEventListener('DOMContentLoaded', () => {
       }
 
       // (6) 팝업 표시
-      const popupText = 
+      const popupText =
         `승자: ${winnerName || "없음"}<br>` +
         `이유: ${reason}<br>` +
         `– 데미지: ${damage} HP`;
       await showModal(popupText);
     }
+
+    // ————— 여기서 전체 전투 요약 저장 —————
+    try {
+      await fetch('/api/saveBattle', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          userCards:   orderedUser,   // 사용자 카드 배열
+          aiCards:     aiCards,       // AI 카드 배열
+          judgePrompt,                // 심사 기준
+          userHP,                     // 최종 사용자 HP
+          aiHP                        // 최종 AI HP
+        })
+      });
+      console.log('Battle summary saved.');
+    } catch (err) {
+      console.error('Failed to save battle summary:', err);
+    }
+    // ————————————————————————————————
 
     // 8) 최종 결과 & 랭킹 보기 버튼
     let finalText = userHP > aiHP
@@ -136,9 +154,8 @@ document.addEventListener('DOMContentLoaded', () => {
       ${finalText}<br>
       <button id="rankBtn">랭킹 보러 가기</button>
     `;
-    document.getElementById('rankBtn').addEventListener('click', () => {
-      window.location.href = 'ranking.html';
-    });
+    document.getElementById('rankBtn')
+      .addEventListener('click', () => window.location.href = 'ranking.html');
   }
 
   // 9) 전투 자동 시작
