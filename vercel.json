@@ -6,32 +6,13 @@
     }
   },
   "builds": [
-    {
-      "src": "front/**/*",
-      "use": "@vercel/static"
-    },
-    {
-      "src": "app.py",
-      "use": "@vercel/python",
-      "config": { "maxDuration": 10 }
-    }
+    { "src": "front/**/*", "use": "@vercel/static" },
+    { "src": "app.py", "use": "@vercel/python", "config": { "maxDuration": 10 } }
   ],
   "routes": [
-    {
-      "src": "/api/savePlayer",
-      "dest": "/api/savePlayer.js"
-    },
-    {
-      "src": "/api/(.*)",
-      "dest": "app.py"
-    },
-    {
-      "src": "/",
-      "dest": "/front/onboarding.html"
-    },
-    {
-      "src": "/(.*)",
-      "dest": "/front/$1"
-    }
+    { "src": "/api/savePlayer", "dest": "/api/savePlayer.js" },
+    { "src": "/api/(.*)", "dest": "/app.py" },
+    { "src": "/", "dest": "/front/onboarding.html" },
+    { "src": "/(.*)", "dest": "/front/$1" }
   ]
 }
