@@ -6,6 +6,8 @@ const supabase = createClient(
 );
 
 export default async function handler(req, res) {
+  console.log("SUPA URL:", process.env.NEXT_PUBLIC_SUPABASE_URL);
+  console.log("SERVICE KEY set?", !!process.env.SUPABASE_SERVICE_ROLE_KEY);
   console.log("savePlayer.js invoked"); // 함수 실행 로그
 
   if (req.method !== 'POST') {
