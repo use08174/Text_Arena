@@ -74,30 +74,32 @@
     });
 
     startBtn.addEventListener('click', async () => {
-      const playerName = nameInput.value.trim();
-      localStorage.setItem('playerName', playerName);
+    const playerName = nameInput.value.trim();
+    localStorage.setItem('playerName', playerName);
 
-      // DB에 저장
-      try {
-        const response = await fetch('/api/savePlayer', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ name: playerName }),
-        });
+    try {
+      const response = await fetch('/api/savePlayer', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name: playerName }),
+      });
 
-        const result = await response.json();
-        if (result.success) {
-          console.log("이름이 DB에 저장되었습니다:", result.data);
-        } else {
-          console.error("저장 실패:", result.error);
-        }
-      } catch (err) {
-        console.error("에러 발생:", err);
+      if (!response.ok) {
+        // 에러 바디를 텍스트로 읽어서 로그
+        const errText = await response.text();
+        console.error('API 에러:', errText);
+        return;
       }
 
-      // 다음 화면으로 이동
-      window.location.href = 'index.html';
-    });
+      const result = await response.json();
+      console.log("이름이 DB에 저장되었습니다:", result.data);
+    } catch (err) {
+      console.error("네트워크 혹은 파싱 중 에러 발생:", err);
+    }
+
+    // 저장이 끝나면 다음 화면으로 이동
+    window.location.href = '/index.html';
+  });
     </script>
 
 </body>
