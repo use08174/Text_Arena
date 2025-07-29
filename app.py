@@ -71,7 +71,7 @@ async def battle(req: BattleRequest):
         characters = req.characters
 
         personas = [
-            {"name": character.name, "desc": f"{character.persona_main}, 나이: {character.age}, 성별: {character.gender}, 공격력: {character.attack_power}, 약점: {character.weakness}"}
+            {"name": character.name, "desc": f"{character.persona_main}, {character.persona_detail}, 나이: {character.age}, 성별: {character.gender}, 공격력: {character.attack_power}, 약점: {character.weakness}"}
             for character in characters
         ]
 
