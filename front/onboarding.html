@@ -73,10 +73,32 @@
       startBtn.disabled = nameInput.value.trim() === '';
     });
 
-    startBtn.addEventListener('click', () => {
-      localStorage.setItem('playerName', nameInput.value.trim());
+    startBtn.addEventListener('click', async () => {
+      const playerName = nameInput.value.trim();
+      localStorage.setItem('playerName', playerName);
+
+      // DB에 저장
+      try {
+        const response = await fetch('/api/savePlayer', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ name: playerName }),
+        });
+
+        const result = await response.json();
+        if (result.success) {
+          console.log("이름이 DB에 저장되었습니다:", result.data);
+        } else {
+          console.error("저장 실패:", result.error);
+        }
+      } catch (err) {
+        console.error("에러 발생:", err);
+      }
+
+      // 다음 화면으로 이동
       window.location.href = 'index.html';
     });
-  </script>
+    </script>
+
 </body>
 </html>
