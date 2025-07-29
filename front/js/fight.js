@@ -124,24 +124,30 @@ document.addEventListener('DOMContentLoaded', () => {
       await showModal(popupText);
     }
 
-    // ————— 여기서 전체 전투 요약 저장 —————
+    // ————— 전체 전투 요약 저장 —————
+    const playerId = Number(localStorage.getItem('playerId'));
     try {
-      await fetch('/api/saveBattle', {
+      const res = await fetch('/api/saveBattle', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          userCards:   orderedUser,   // 사용자 카드 배열
-          aiCards:     aiCards,       // AI 카드 배열
-          judgePrompt,                // 심사 기준
-          userHP,                     // 최종 사용자 HP
-          aiHP                        // 최종 AI HP
+          playerId,                // 플레이어 식별자
+          userCards:   orderedUser,
+          aiCards:     aiCards,
+          judgePrompt,             // 심사 기준
+          userHP,                  // 최종 사용자 HP
+          aiHP                     // 최종 AI HP
         })
       });
-      console.log('Battle summary saved.');
+      if (!res.ok) {
+        console.error('Battle save failed:', await res.text());
+      } else {
+        console.log('Battle summary saved.');
+      }
     } catch (err) {
       console.error('Failed to save battle summary:', err);
     }
-    // ————————————————————————————————
+    // ——————————————————————————
 
     // 8) 최종 결과 & 랭킹 보기 버튼
     let finalText = userHP > aiHP

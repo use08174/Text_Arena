@@ -55,23 +55,29 @@
   </div>
 
   <script>
-    // 로컬 스토리지에서 랭킹 데이터 가져오기
-    const data = JSON.parse(localStorage.getItem('battleRank') || '[]');
+    document.addEventListener('DOMContentLoaded', async () => {
+      try {
+        const res = await fetch('/api/getBattles');
+        if (!res.ok) throw new Error(await res.text());
+        const battles = await res.json();
 
-    // 정렬: 승리 횟수 내림차순, HP 내림차순, 날짜 내림차순
-    data.sort((a, b) => b.wins - a.wins || b.hp - a.hp || new Date(b.date) - new Date(a.date));
+        const tbody = document.querySelector('#rankingTable tbody');
+        battles.forEach((battle, idx) => {
+          // user_cards 는 배열이므로, 예: 카드 이름만 콤마로 조합
+          const names = battle.user_cards.map(c => c.name).join(', ');
 
-    const tbody = document.querySelector('#rankingTable tbody');
-    data.forEach((entry, idx) => {
-      const tr = document.createElement('tr');
-      tr.innerHTML = `
-        <td>${idx + 1}</td>
-        <td>${entry.name}</td>
-        <td>${entry.wins}</td>
-        <td>${entry.hp}</td>
-        <td>${new Date(entry.date).toLocaleString()}</td>
-      `;
-      tbody.appendChild(tr);
+          const tr = document.createElement('tr');
+          tr.innerHTML = `
+            <td>${idx + 1}</td>
+            <td>${names}</td>
+            <td>${battle.user_hp}</td>
+            <td>${new Date(battle.created_at).toLocaleString()}</td>
+          `;
+          tbody.appendChild(tr);
+        });
+      } catch (err) {
+        console.error('랭킹 로드 실패:', err);
+      }
     });
   </script>
 </body>
