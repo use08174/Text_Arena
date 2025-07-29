@@ -253,7 +253,7 @@ button:hover:not(:disabled) {
 }
 /* 팝업창 세로 길이 제한 & 내부 스크롤 */
 #modal {
-  max-height: 25vh;    /* 뷰포트 높이의 25%만 사용 */
+  max-height: 50vh;    /* 뷰포트 높이의 25%만 사용 */
   overflow-y: auto;    /* 내용이 많으면 내부만 스크롤 */
   /* (선택) 가로너비도 카드 5장폭에 맞추고 싶으면 아래 두 줄 추가 */
   width: fit-content;
@@ -278,7 +278,7 @@ button:hover:not(:disabled) {
 /* 1. HP 표시 박스 스타일 */
 #aiHpDisplay,
 #userHpDisplay {
-  display: inline-block;
+  display: inline-flex;
   background: rgba(255, 255, 255, 0.8);
   color: #000;
     align-items: center;          /* 수직 중앙 정렬 */
@@ -292,13 +292,11 @@ button:hover:not(:disabled) {
 /* 2. 플래시 애니메이션 정의 */
 @keyframes flashRed {
   0%   { background-color: rgba(255,255,255,0.8); }
-  50%  { background-color: #f8d7da; }
-  100% { background-color: rgba(255,255,255,0.8); }
+  50%  { background-color: #eb3b4a; }
 }
 @keyframes flashGreen {
   0%   { background-color: rgba(255,255,255,0.8); }
-  50%  { background-color: #d4edda; }
-  100% { background-color: rgba(255,255,255,0.8); }
+  50%  { background-color: #4ee872; }
 }
 
 /* 3. 플래시용 클래스 */
@@ -308,6 +306,16 @@ button:hover:not(:disabled) {
 .hp-flash-green {
   animation: flashGreen 0.6s forwards;
 }
+
+/* 결과 유지용 HP 색상 클래스 */
+.hp-red {
+  background-color: #eb3b4a !important;  /* 연한 빨강 */
+}
+
+.hp-green {
+  background-color: #4ee872 !important;  /* 연한 초록 */
+}
+
 
 
 

@@ -81,7 +81,7 @@ document.addEventListener('DOMContentLoaded', () => {
       // (3) GPT 판단 요청
       let winnerText = '';
       try {
-        const res = await fetch('/api/battle', {
+        const res = await fetch('http://127.0.0.1:8000/api/battle', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
@@ -98,7 +98,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
       // (4) 로딩 오버레이 숨기기
       loading.style.display = 'none';
-
       // (5) 응답 파싱 및 HP 갱신
       const winMatch    = winnerText.match(/승자:\s*(.+)/);
       const reasonMatch = winnerText.match(/이유:\s*([\s\S]+)/);
@@ -107,36 +106,87 @@ document.addEventListener('DOMContentLoaded', () => {
       let damage = 0;
 
       if (winnerName === userCard.name) {
+        // 유저 승리 → AI HP 데미지
         damage  = userCard.attack_power;
         aiHP    = Math.max(0, aiHP - damage);
         aiHpEl.textContent = `HP: ${aiHP}`;
 
-        aiHpEl.classList.add('hp-flash-red');     // AI HP 빨강 깜빡
-        userHpEl.classList.add('hp-flash-green'); // 내 HP 초록 깜빡
-        setTimeout(() => {
-          aiHpEl.classList.remove('hp-flash-red');
-          userHpEl.classList.remove('hp-flash-green');
-        }, 600);
-      } 
-      else if (winnerName === aiCard.name) {
+        // 팝업 떠 있는 동안 색상 유지
+        aiHpEl.classList.add('hp-red');
+        userHpEl.classList.add('hp-green');
+
+      } else if (winnerName === aiCard.name) {
+        // AI 승리 → 유저 HP 데미지
         damage   = aiCard.attack_power;
         userHP   = Math.max(0, userHP - damage);
         userHpEl.textContent = `HP: ${userHP}`;
-      
-        userHpEl.classList.add('hp-flash-red');     // 내 HP 빨강 깜빡
-        aiHpEl.classList.add('hp-flash-green');     // AI HP 초록 깜빡
-        setTimeout(() => {
-          userHpEl.classList.remove('hp-flash-red');
-          aiHpEl.classList.remove('hp-flash-green');
-        }, 600);
+
+        // 팝업 떠 있는 동안 색상 유지
+        userHpEl.classList.add('hp-red');
+        aiHpEl.classList.add('hp-green');
+      }
+      // (6) 팝업 표시 — 사용자 관점으로 재구성
+      const resultText = winnerName === userCard.name
+        ? '승리'
+        : winnerName === aiCard.name
+          ? '패배'
+          : '무승부';
+
+      // 내가 적에게 입힌/내가 입은 데미지 계산
+      const dealtDamage = (winnerName === userCard.name) ? damage : 0;
+      const takenDamage = (winnerName === aiCard.name) ? damage : 0;
+      const myRemainingHp = userHP;
+
+      // 조건별 damageLine
+      let damageLine = '';
+      if (resultText === '승리') {
+        damageLine = `
+          <p>
+            <strong style="color:#555;">적에게 입힌 데미지:</strong>
+            <span style="color:#28a745; font-weight:bold;">${dealtDamage} HP</span>
+          </p>`;
+      } else if (resultText === '패배') {
+        damageLine = `
+          <p>
+            <strong style="color:#555;">내가 입은 데미지:</strong>
+            <span style="color:#eb3b4a; font-weight:bold;">${takenDamage} HP</span>
+          </p>`;
+      } else {
+        damageLine = `
+          <p>
+            <strong style="color:#555;">데미지:</strong>
+            <span style="color:#888; font-weight:bold;">0 HP</span>
+          </p>`;
       }
 
-      // (6) 팝업 표시
-      const popupText =
-        `승자: ${winnerName || "없음"}<br>` +
-        `이유: ${reason}<br>` +
-        `– 데미지: ${damage} HP`;
+      // 팝업 HTML
+      const popupText = `
+        <div style="text-align:left; line-height:1.6;">
+          <h2 style="margin:0 0 0.5rem; font-size:1.8rem;">
+            <span style="color:#333;">결과:</span>
+            <span style="color:${
+              resultText === '승리' ? '#28a745'
+              : resultText === '패배' ? '#eb3b4a'
+              : '#333'
+            }; font-weight:bold;"> ${resultText}</span>
+          </h2>
+          <p><strong style="color:#555;">이유:</strong> ${reason}</p>
+          ${damageLine}
+          <hr style="margin:0.8rem 0; border-color:#ddd;" />
+          <p>
+            <strong style="color:#555;">내 남은 HP:</strong>
+            <span style="font-size:1.2rem; font-weight:bold; color:#333;">
+              ${myRemainingHp} HP
+            </span>
+          </p>
+        </div>
+      `;
       await showModal(popupText);
+
+      // 팝업 닫힌 뒤에 원래 배경(흰색)으로 복원
+      aiHpEl.classList.remove('hp-red', 'hp-green');
+      userHpEl.classList.remove('hp-red', 'hp-green');
+
     }
 
     // ————— 전체 전투 요약 저장 —————
