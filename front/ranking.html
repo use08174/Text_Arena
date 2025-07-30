@@ -57,14 +57,16 @@
   <script>
     document.addEventListener('DOMContentLoaded', async () => {
       try {
-        const res = await fetch('/api/getBattles');
+        const res = await fetch('/api/getBattle');
         if (!res.ok) throw new Error(await res.text());
-        const battles = await res.json();
+        const battles = await res.json();  // 배열
 
         const tbody = document.querySelector('#rankingTable tbody');
         battles.forEach((battle, idx) => {
-          // user_cards 는 배열이므로, 예: 카드 이름만 콤마로 조합
-          const names = battle.user_cards.map(c => c.name).join(', ');
+          // user_cards 가 배열인지 안전하게 체크
+          const names = Array.isArray(battle.user_cards)
+            ? battle.user_cards.map(c => c.name).join(', ')
+            : '-';
 
           const tr = document.createElement('tr');
           tr.innerHTML = `
@@ -75,10 +77,18 @@
           `;
           tbody.appendChild(tr);
         });
+
+        if (battles.length === 0) {
+          const tr = document.createElement('tr');
+          tr.innerHTML = `<td colspan="4">아직 전투 기록이 없습니다.</td>`;
+          tbody.appendChild(tr);
+        }
       } catch (err) {
         console.error('랭킹 로드 실패:', err);
+        const tbody = document.querySelector('#rankingTable tbody');
+        tbody.innerHTML = `<tr><td colspan="4">데이터를 불러오지 못했습니다.</td></tr>`;
       }
     });
-  </script>
+    </script>
 </body>
 </html>
