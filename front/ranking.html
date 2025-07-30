@@ -59,36 +59,33 @@
       try {
         const res = await fetch('/api/getBattle');
         if (!res.ok) throw new Error(await res.text());
-        const battles = await res.json();  // 배열
+        const battles = await res.json();
 
         const tbody = document.querySelector('#rankingTable tbody');
-        battles.forEach((battle, idx) => {
-          // user_cards 가 배열인지 안전하게 체크
-          const names = Array.isArray(battle.user_cards)
-            ? battle.user_cards.map(c => c.name).join(', ')
-            : '-';
+        battles.forEach((b, i) => {
+          const name = b.player?.name || '—';
+          const hp   = b.user_hp;
+          const date = new Date(b.created_at).toLocaleString();
 
           const tr = document.createElement('tr');
           tr.innerHTML = `
-            <td>${idx + 1}</td>
-            <td>${names}</td>
-            <td>${battle.user_hp}</td>
-            <td>${new Date(battle.created_at).toLocaleString()}</td>
+            <td>${i + 1}</td>
+            <td>${name}</td>
+            <td>${hp}</td>
+            <td>${date}</td>
           `;
           tbody.appendChild(tr);
         });
 
         if (battles.length === 0) {
-          const tr = document.createElement('tr');
-          tr.innerHTML = `<td colspan="4">아직 전투 기록이 없습니다.</td>`;
-          tbody.appendChild(tr);
+          tbody.innerHTML = '<tr><td colspan="4">아직 전투 기록이 없습니다.</td></tr>';
         }
       } catch (err) {
         console.error('랭킹 로드 실패:', err);
-        const tbody = document.querySelector('#rankingTable tbody');
-        tbody.innerHTML = `<tr><td colspan="4">데이터를 불러오지 못했습니다.</td></tr>`;
+        document.querySelector('#rankingTable tbody')
+          .innerHTML = '<tr><td colspan="4">데이터를 불러오지 못했습니다.</td></tr>';
       }
     });
-    </script>
+  </script>
 </body>
 </html>
