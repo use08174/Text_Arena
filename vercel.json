@@ -8,7 +8,7 @@
   "routes": [
     { "src": "/api/savePlayer", "dest": "/api/savePlayer.js" },
     { "src": "/api/saveBattle", "dest": "/api/saveBattle.js" },
-    { "src": "/api/saveBattle", "dest": "/api/getBattle.js" },
+    { "src": "/api/getBattle", "dest": "/api/getBattle.js" },
     { "src": "/api/(.*)",       "dest": "/app.py" },
     { "src": "/",               "dest": "/front/onboarding.html" },
     { "src": "/(.*)",           "dest": "/front/$1" }
