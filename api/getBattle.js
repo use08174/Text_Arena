@@ -12,17 +12,9 @@ export default async function handler(req, res) {
   }
 
   try {
-    // player_id 로 players 테이블을 조인해서 name 필드를 가져옵니다.
     const { data, error } = await supabase
       .from('battles')
-      .select(`
-        player_id,
-        user_hp,
-        created_at,
-        player:players (   /* alias = player */
-          name             /* players.name 만 가져옴 */
-        )
-      `)
+      .select('player_id, user_hp, created_at, player:players(name)')
       .order('user_hp', { ascending: false })
       .limit(100);
 
