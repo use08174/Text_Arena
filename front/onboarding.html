@@ -13,8 +13,8 @@
         url('assets/logo.png') no-repeat center top,
         url('assets/logo.png') no-repeat center center;
       background-size:
-        contain,   
-        cover;      
+        contain,
+        cover;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -69,38 +69,51 @@
     const nameInput = document.getElementById('playerNameInput');
     const startBtn  = document.getElementById('startBtn');
 
+    // 버튼 활성화 토글
     nameInput.addEventListener('input', () => {
       startBtn.disabled = nameInput.value.trim() === '';
     });
 
     startBtn.addEventListener('click', async () => {
-    const playerName = nameInput.value.trim();
-    localStorage.setItem('playerName', playerName);
+      const playerName = nameInput.value.trim();
+      // 이름은 나중에 화면에 표시할 용도로 저장
+      localStorage.setItem('playerName', playerName);
 
-    try {
-      const response = await fetch('/api/savePlayer', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ name: playerName }),
-      });
+      try {
+        const response = await fetch('/api/savePlayer', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ name: playerName }),
+        });
 
-      if (!response.ok) {
-        // 에러 바디를 텍스트로 읽어서 로그
-        const errText = await response.text();
-        console.error('API 에러:', errText);
+        if (!response.ok) {
+          const errText = await response.text();
+          console.error('API 에러:', errText);
+          alert('플레이어 등록에 실패했습니다. 다시 시도하세요.');
+          return;
+        }
+
+        const result = await response.json();
+        // result.data는 [{ id: ... }]
+        const playerId = result.data[0]?.id;
+        if (!playerId) {
+          console.error('응답에 playerId가 없습니다:', result);
+          alert('플레이어 ID를 받지 못했습니다.');
+          return;
+        }
+        // 이후 전투 저장 시 사용할 playerId
+        localStorage.setItem('playerId', playerId);
+
+        console.log("이름이 DB에 저장되었습니다:", result.data);
+      } catch (err) {
+        console.error("네트워크 혹은 파싱 중 에러 발생:", err);
+        alert('네트워크 오류가 발생했습니다. 다시 시도하세요.');
         return;
       }
 
-      const result = await response.json();
-      console.log("이름이 DB에 저장되었습니다:", result.data);
-    } catch (err) {
-      console.error("네트워크 혹은 파싱 중 에러 발생:", err);
-    }
-
-    // 저장이 끝나면 다음 화면으로 이동
-    window.location.href = '/index.html';
-  });
-    </script>
-
+      // 저장이 끝나면 전투 화면으로 이동
+      window.location.href = '/index.html';
+    });
+  </script>
 </body>
 </html>
