@@ -1,7 +1,6 @@
 // api/getBattle.js
 import { createClient } from '@supabase/supabase-js';
 
-// 서버 도메인 함수이므로 Service Role Key 를 사용합니다.
 const supabase = createClient(
   process.env.NEXT_PUBLIC_SUPABASE_URL,
   process.env.SUPABASE_SERVICE_ROLE_KEY
@@ -11,15 +10,11 @@ export default async function handler(req, res) {
   if (req.method !== 'GET') {
     return res.status(405).json({ error: 'Only GET allowed' });
   }
-  
-  console.log('getBattle invoked');
-  console.log('URL:', process.env.NEXT_PUBLIC_SUPABASE_URL);
-  console.log('Using service role key?', !!process.env.SUPABASE_SERVICE_ROLE_KEY);
 
   try {
     const { data, error } = await supabase
       .from('battles')
-      .select('player_id, user_cards, user_hp, created_at')
+      .select('player_id, user_hp, created_at, player:players(name)')
       .order('user_hp', { ascending: false })
       .limit(100);
 
@@ -28,7 +23,6 @@ export default async function handler(req, res) {
       return res.status(500).json({ error: error.message });
     }
 
-    // 정상 데이터 응답
     return res.status(200).json(data);
   } catch (e) {
     console.error('Unhandled exception in getBattle:', e);

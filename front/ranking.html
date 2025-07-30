@@ -6,7 +6,6 @@
   <title>🏆 전투 랭킹</title>
   <link rel="stylesheet" href="css/style.css"/>
   <style>
-    /* 랭킹 컨테이너 스타일 */
     .ranking-container {
       max-width: 800px;
       margin: 2rem auto;
@@ -45,8 +44,7 @@
         <tr>
           <th>순위</th>
           <th>이름</th>
-          <th>승리 횟수</th>
-          <th>최종 HP</th>
+          <th>HP</th>
           <th>날짜</th>
         </tr>
       </thead>
@@ -56,39 +54,38 @@
 
   <script>
     document.addEventListener('DOMContentLoaded', async () => {
+      const tbody = document.querySelector('#rankingTable tbody');
       try {
         const res = await fetch('/api/getBattle');
         if (!res.ok) throw new Error(await res.text());
-        const battles = await res.json();  // 배열
+        const battles = await res.json();
 
-        const tbody = document.querySelector('#rankingTable tbody');
-        battles.forEach((battle, idx) => {
-          // user_cards 가 배열인지 안전하게 체크
-          const names = Array.isArray(battle.user_cards)
-            ? battle.user_cards.map(c => c.name).join(', ')
-            : '-';
+        // 데이터가 없으면 안내 메시지
+        if (battles.length === 0) {
+          tbody.innerHTML = '<tr><td colspan="4">아직 전투 기록이 없습니다.</td></tr>';
+          return;
+        }
+
+        // 순위별로 테이블에 행 추가
+        battles.forEach((b, idx) => {
+          const name   = b.player?.name || '—';
+          const hp     = b.user_hp;
+          const date   = new Date(b.created_at).toLocaleString();
 
           const tr = document.createElement('tr');
           tr.innerHTML = `
             <td>${idx + 1}</td>
-            <td>${names}</td>
-            <td>${battle.user_hp}</td>
-            <td>${new Date(battle.created_at).toLocaleString()}</td>
+            <td>${name}</td>
+            <td>${hp}</td>
+            <td>${date}</td>
           `;
           tbody.appendChild(tr);
         });
-
-        if (battles.length === 0) {
-          const tr = document.createElement('tr');
-          tr.innerHTML = `<td colspan="4">아직 전투 기록이 없습니다.</td>`;
-          tbody.appendChild(tr);
-        }
       } catch (err) {
         console.error('랭킹 로드 실패:', err);
-        const tbody = document.querySelector('#rankingTable tbody');
-        tbody.innerHTML = `<tr><td colspan="4">데이터를 불러오지 못했습니다.</td></tr>`;
+        tbody.innerHTML = '<tr><td colspan="4">데이터를 불러오지 못했습니다.</td></tr>';
       }
     });
-    </script>
+  </script>
 </body>
 </html>
