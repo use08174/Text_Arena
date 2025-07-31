@@ -316,7 +316,8 @@ button:hover:not(:disabled) {
   background-color: #4ee872 !important;  /* 연한 초록 */
 }
 
-
+.battle-wrap      { display:block; }          /* 두 덱을 위·아래로 */
+.row .card-row    { display:flex; flex-direction:row; gap:1rem; } /* 카드 가로 */
 
 
 
@@ -430,7 +431,7 @@ button:hover:not(:disabled) {
   }
 
   h1 {
-    font-size: 1.6rem;
+    font-size: 1.4rem;
   }
 
   .welcome-text {
@@ -462,60 +463,46 @@ button:hover:not(:disabled) {
 
   /*fight.html*/
   /* 배틀 화면 모바일 레이아웃 */
-  .fight-body .container.fight-container {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 1rem;
+
+  .fight-container {
     padding: 0.5rem;
+    width: 100vw;
+    max-width: 100vw;
     box-sizing: border-box;
   }
-  .fight-body .container.fight-container .row {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin: 0;
-    padding: 0;
-  }
-  .fight-body .hp-group {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-bottom: 0.5rem;
-  }
-  .fight-body .card-row {
-    display: flex !important;
-    flex-direction: column !important;
-    gap: 0.75rem;
-    overflow-y: auto;
-    max-height: calc(100vh - 180px);
-    padding: 0;
-    margin: 0;
-  }
-  .fight-body .card {
-    width: 80px;
-    height: auto;
-  }
-  .fight-body .card.attack {
-    transform: translateX(20px);
-  }
-  .fight-body .card.defend {
-    transform: translateX(-20px);
-  }
-  .fight-body #modalBackdrop {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background: transparent !important;
-    padding: 0 1rem;
-  }
-  .fight-body #modal {
-    width: 90vw;
-    max-width: 360px;
-    padding: 1rem;
-    font-size: 0.9rem;
-    overflow: visible;
-  }
 
+  .battle-cols {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 0.5rem;
+    width: 100%;
+    margin: 0 auto;
+  }
+  .battle-col {
+    flex: 1 1 48%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .hp-group {
+    margin-bottom: 0.4rem;
+  }
+  .card-col {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+    align-items: center;
+    width: 100%;
+  }
+  .card {
+    width: 90px;
+    aspect-ratio: 10/14;
+    min-width: 72px;
+    max-width: 108px;
+    font-size: 0.82rem;
+  }
+  
   /*ranking.html */
   .ranking-container {
     padding: 1rem;
@@ -591,7 +578,17 @@ button:hover:not(:disabled) {
     grid-template-columns: repeat(3, 1fr);
   }
    h1 {
-    font-size: 1.8rem;
+    font-size: 1.5rem;
+  }
+  #order{
+    font-size: 1rem;
+  }
+  #my-card{
+    margin-top: 50px;
+    margin-bottom: 0px;
+  }
+  h2{
+    font-size: 1.3rem;
   }
 
   /* order.html 전용: flex 로 3장씩 */
@@ -637,4 +634,168 @@ button:hover:not(:disabled) {
   .judge-section textarea {
     width: 95%;
   }
+  /*전투장 화면*/
+   /* ① 두 덱을 좌·우 두 칼럼으로 */
+  .fight-body .battle-wrap .row>.card-row{
+      display:flex !important;
+      flex-direction:column !important;
+      flex-wrap:nowrap !important;      /* wrap 금지 */
+      overflow-y:visible !important;   /* ← 스크롤 해제 */
+      max-height:none !important;      /* ← 높이 제한 해제 */
+               
+  }
+
+  /* 카드 폭을 덱 폭에 맞춰 축소 */
+  .fight-body .battle-wrap .card-row .card{
+      top: 80px;
+      width:78px;           /* 필요-하면 더 줄여 줌 */
+      max-width:80px;
+  }
+  .fight-body .battle-wrap{
+      display:flex;
+      flex-direction:row;
+      justify-content:space-between;
+      gap:0.8rem;
+      width:100%;
+  }
+
+  /* ② 각 덱(col) 안 - HP·라벨 → 카드 세로 1줄 */
+  .fight-body .battle-wrap .row{
+      flex: 1 1 48%;
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+  }
+  .fight-body .battle-wrap .card-row{
+      /* ← 전역 wrap 규칙을 덮어쓴다 */
+      flex-wrap:nowrap;              /* 한 줄! */
+      flex-direction:column;         /* 위→아래 */
+      align-items:center;
+      gap:0.5rem;
+  }
+
+  .fight-body .battle-wrap #enemyRow{
+      
+      top: 80px;
+      width:78px;           /* 필요-하면 더 줄여 줌 */
+      max-width:80px;
+  }
+   .fight-body .battle-wrap #userRow{
+      top: 100px;
+      width:78px;           /* 필요-하면 더 줄여 줌 */
+      max-width:80px;
+  }
+  /* ③ 카드 비율 & 크기 */
+  .fight-body .card{
+      width:80px;                    /* 취향대로 조절 */
+      aspect-ratio:2/1.5;
+      font-size:0.75rem;
+  }
+  .fight-body .card-thumbnail{
+    height: 50px;
+
+  }
+  .fight-body .card-desc-box{
+    font-size: 0.45rem;
+  }
+  .fight-body .card-name-box{
+    font-size: 0.7rem;
+  }
+    /* 1. 모달 외곽 */
+  .fight-body #modal{
+    margin-left: -8px;
+    position:fixed;               /* 뷰포트 기준으로 고정 */
+    left:50%; top:50%;
+    transform:translate(-50%,-50%);
+
+    width: 90vw;                  /* 좌우 4 vw 여백(2 vw+2 vw) */
+    max-width: 350px;             /* 너무 커지지 않게 */
+    max-height: 60vh;             /* 세로는 화면의 80 % 까지만 */
+    background:#fff;
+    color:#333;
+    border-radius:10px;
+    box-shadow:0 6px 20px rgba(0,0,0,.25);
+
+    display:flex;                 /* 내부를 위→아래로 스택 */
+    flex-direction:column;
+    overflow:hidden;              /* 둥근 모서리 밖 스크롤 감춤 */
+    font-size:.9rem;             /* 모바일 기본 글자 */
+  }
+
+  /* 2-A. 텍스트 영역 */
+  .fight-body #modal .modal-body{
+    padding:1rem 1.4rem;
+    overflow-y:auto;              
+  }
+  .fight-body #modal .modal-body h2{
+    font-size:1.4rem; margin:0 0 .8rem;
+  }
+
+  /* 3. 버튼 영역(푸터) */
+  .fight-body #modal .modal-footer{
+    padding:0 1.6rem 1.6rem;
+    margin-top:auto;             
+  }
+  .fight-body #modal .modal-footer #nextBtn{
+    width:100%;
+    display:block;
+    padding:.9rem 0;
+    font-size:1.05rem;
+  }
+
+    /* 1) 적 카드 → 화면 가운데로  (오른쪽 이동) */
+  .fight-body .battle-wrap .card.attack{
+     transform: translateX(40px);
+  }
+
+  /* 2) 내 카드 → 화면 가운데로  (왼쪽 이동) */
+  .fight-body .battle-wrap .card.defend{
+      transform: translateX(-40px);
+  }
+
+
+  /* ④ HP·라벨 정렬 소폭 조정(옵션) */
+  .hp-group{ margin-bottom:0.5rem; }
+  .deck-label{
+    font-size: 1rem;
+  }
+  #aiHpDisplay,#userHpDisplay{
+    display: inline-flex;
+  background: rgba(255, 255, 255, 0.8);
+  color: #000;
+    align-items: center;          /* 수직 중앙 정렬 */
+  justify-content: center;      /* 수평 중앙 정렬 */
+  padding: 0.3rem 0rem;
+  border-radius: 4px;
+  font-size: 1rem;
+  transition: background-color 0.3s ease;
+  }
+  /* 2. 플래시 애니메이션 정의 */
+@keyframes flashRed {
+  0%   { background-color: rgba(255,255,255,0.8); }
+  50%  { background-color: #eb3b4a; }
+}
+@keyframes flashGreen {
+  0%   { background-color: rgba(255,255,255,0.8); }
+  50%  { background-color: #4ee872; }
+}
+
+/* 3. 플래시용 클래스 */
+.hp-flash-red {
+  animation: flashRed 0.6s forwards;
+}
+.hp-flash-green {
+  animation: flashGreen 0.6s forwards;
+}
+
+/* 결과 유지용 HP 색상 클래스 */
+.hp-red {
+  background-color: #eb3b4a !important;  /* 연한 빨강 */
+}
+
+.hp-green {
+  background-color: #4ee872 !important;  /* 연한 초록 */
+}
+  
+
 }
