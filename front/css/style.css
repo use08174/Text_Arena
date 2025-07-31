@@ -578,10 +578,12 @@ button:hover:not(:disabled) {
     grid-template-columns: repeat(3, 1fr);
   }
    h1 {
-    font-size: 1.5rem;
+    font-size: 1.4rem;
   }
   #order{
-    font-size: 1rem;
+    margin-top: 30px;
+    margin-bottom: 5px;
+    font-size: 1.3rem;
   }
   #my-card{
     margin-top: 50px;
