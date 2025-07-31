@@ -14,7 +14,7 @@ export default async function handler(req, res) {
   try {
     const { data, error } = await supabase
       .from('battles')
-      .select('player_id, user_hp, created_at, player:players(name)')
+      .select('player_id, user_hp, created_at, player:players(name), user_cards')
       .order('user_hp', { ascending: false })
       .limit(100);
 
