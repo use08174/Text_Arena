@@ -6,6 +6,17 @@
   <title>🏆 전투 랭킹</title>
   <link rel="stylesheet" href="css/style.css"/>
   <style>
+    /* 전체 배경 */
+      html, body {
+      height: 100%;
+      margin: 0;
+    }
+
+    /* 랭킹 박스 */
+    body {
+      background: url('assets/index.png') no-repeat center center fixed;
+      background-size: cover;
+    }
     .ranking-container {
       max-width: 800px;
       margin: 2rem auto;
@@ -13,12 +24,13 @@
       background: rgba(0, 0, 0, 0.6);
       border-radius: 8px;
       color: #fff;
-      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      font-family: 'DanjoBold', sans-serif;
     }
     .ranking-container h1 {
       text-align: center;
       margin-bottom: 1rem;
     }
+    /* 테이블 */
     table {
       width: 100%;
       border-collapse: collapse;
@@ -34,11 +46,28 @@
     tbody tr:nth-child(odd) {
       background: rgba(255, 255, 255, 0.1);
     }
+  /* 사용 캐릭터 썸네일 */
+    .used-character-cell {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+    justify-content: center;
+    align-items: center;
+    padding: 0.5rem 0;
+  }
+ 
+  .used-character {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    object-fit: cover;     
+    border: 1px solid #fff;
+  }
   </style>
 </head>
 <body>
   <div class="ranking-container">
-    <h1>🏆 전투 랭킹</h1>
+    <h1>🏆 전투 랭킹 🏆</h1>
     <table id="rankingTable">
       <thead>
         <tr>
@@ -46,6 +75,7 @@
           <th>이름</th>
           <th>HP</th>
           <th>날짜</th>
+          <th>사용한 캐릭터</th>
         </tr>
       </thead>
       <tbody></tbody>
@@ -62,7 +92,7 @@
 
         // 데이터가 없으면 안내 메시지
         if (battles.length === 0) {
-          tbody.innerHTML = '<tr><td colspan="4">아직 전투 기록이 없습니다.</td></tr>';
+          tbody.innerHTML = '<tr><td colspan="5">아직 전투 기록이 없습니다.</td></tr>';
           return;
         }
 
@@ -78,12 +108,21 @@
             <td>${name}</td>
             <td>${hp}</td>
             <td>${date}</td>
+            <td class="used-character-cell"></td>
           `;
+          /* 사용 캐릭터 삽입*/
+           const cell = tr.querySelector('.used-character-cell');
+          ;(b.used_characters || []).slice(0,5).forEach(src => {
+            const img = document.createElement('img');
+            img.src = src.startsWith('http') ? src : `assets/${src}`;
+            img.classList.add('used-character');
+            cell.appendChild(img);
+          });
           tbody.appendChild(tr);
         });
       } catch (err) {
         console.error('랭킹 로드 실패:', err);
-        tbody.innerHTML = '<tr><td colspan="4">데이터를 불러오지 못했습니다.</td></tr>';
+        tbody.innerHTML = '<tr><td colspan="5">데이터를 불러오지 못했습니다.</td></tr>';
       }
     });
   </script>
