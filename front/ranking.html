@@ -115,7 +115,7 @@
           const cell = tr.querySelector('td > .user-cards-cell');
           ;(b.user_cards || []).slice(0,5).forEach(src => {
             const img = document.createElement('img');
-            img.src = `assets/${src}`;
+            img.src = `front/assets/${src}`;
             img.classList.add('user-cards');
             cell.appendChild(img);
           });
