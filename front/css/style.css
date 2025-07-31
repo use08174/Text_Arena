@@ -694,8 +694,10 @@ button:hover:not(:disabled) {
       font-size:0.75rem;
   }
   .fight-body .card-thumbnail{
-    height: 100x;
-
+    flex: 1 0 auto;           
+    height: 40px;              
+    background-size: cover;
+    background-position: center 10%;
   }
   .fight-body .card-desc-box{
     font-size: 0.5rem;
