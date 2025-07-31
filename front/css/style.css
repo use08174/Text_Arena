@@ -690,7 +690,7 @@ button:hover:not(:disabled) {
   /* ③ 카드 비율 & 크기 */
   .fight-body .card{
       width:90px;                    /* 취향대로 조절 */
-      aspect-ratio:2/1.6;
+      aspect-ratio:14/10;
       font-size:0.75rem;
   }
   .fight-body .card-thumbnail{
@@ -701,9 +701,11 @@ button:hover:not(:disabled) {
   }
   .fight-body .card-desc-box{
     font-size: 0.5rem;
+    height: 80px;
   }
   .fight-body .card-name-box{
     font-size: 0.6rem;
+    padding: 2.5px;
   }
     /* 1. 모달 외곽 */
   .fight-body #modal{
