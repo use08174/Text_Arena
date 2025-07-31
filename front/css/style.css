@@ -650,20 +650,21 @@ button:hover:not(:disabled) {
   /* 카드 폭을 덱 폭에 맞춰 축소 */
   .fight-body .battle-wrap .card-row .card{
       top: 80px;
-      width:78px;           /* 필요-하면 더 줄여 줌 */
-      max-width:80px;
+      width: 80px;           /* 필요-하면 더 줄여 줌 */
+      max-width:100px;
   }
+ 
   .fight-body .battle-wrap{
       display:flex;
       flex-direction:row;
       justify-content:space-between;
-      gap:0.8rem;
+      gap:0.9rem;
       width:100%;
   }
 
   /* ② 각 덱(col) 안 - HP·라벨 → 카드 세로 1줄 */
   .fight-body .battle-wrap .row{
-      flex: 1 1 48%;
+      flex: 1 1 50%;
       display:flex;
       flex-direction:column;
       align-items:center;
@@ -677,31 +678,30 @@ button:hover:not(:disabled) {
   }
 
   .fight-body .battle-wrap #enemyRow{
-      
       top: 80px;
       width:78px;           /* 필요-하면 더 줄여 줌 */
       max-width:80px;
   }
    .fight-body .battle-wrap #userRow{
       top: 100px;
-      width:78px;           /* 필요-하면 더 줄여 줌 */
+      width:80px;           /* 필요-하면 더 줄여 줌 */
       max-width:80px;
   }
   /* ③ 카드 비율 & 크기 */
   .fight-body .card{
-      width:80px;                    /* 취향대로 조절 */
-      aspect-ratio:2/1.5;
+      width:90px;                    /* 취향대로 조절 */
+      aspect-ratio:2/1.6;
       font-size:0.75rem;
   }
   .fight-body .card-thumbnail{
-    height: 50px;
+    height: 100x;
 
   }
   .fight-body .card-desc-box{
-    font-size: 0.45rem;
+    font-size: 0.5rem;
   }
   .fight-body .card-name-box{
-    font-size: 0.7rem;
+    font-size: 0.6rem;
   }
     /* 1. 모달 외곽 */
   .fight-body #modal{
@@ -710,7 +710,7 @@ button:hover:not(:disabled) {
     left:50%; top:50%;
     transform:translate(-50%,-50%);
 
-    width: 90vw;                  /* 좌우 4 vw 여백(2 vw+2 vw) */
+    width: 85vw;                  /* 좌우 4 vw 여백(2 vw+2 vw) */
     max-width: 270px;             /* 너무 커지지 않게 */
     max-height: 60vh;             /* 세로는 화면의 80 % 까지만 */
     background:#fff;
@@ -725,7 +725,7 @@ button:hover:not(:disabled) {
 
   /* 2-A. 텍스트 영역 */
   .fight-body #modal .modal-body{
-    padding:1rem 1.4rem;
+    padding:1rem 1.3rem;
     overflow-y:auto;              
   }
   .fight-body #modal .modal-body h2{
@@ -734,13 +734,13 @@ button:hover:not(:disabled) {
 
   /* 3. 버튼 영역(푸터) */
   .fight-body #modal .modal-footer{
-    padding:0 1.6rem 1.6rem;
+    padding:0 1.5rem 1.5rem;
     margin-top:auto;             
   }
   .fight-body #modal .modal-footer #nextBtn{
     width:100%;
     display:block;
-    padding:.9rem 0;
+    padding:.8rem 0;
     font-size:1.05rem;
   }
 
