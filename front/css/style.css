@@ -32,7 +32,7 @@ body {
   font-size: larger;
 }
 
-.battle-body {
+.battle-body,.fight-body {
   margin: 0;
   padding: 0;
   background: url('../assets/index.png') center/cover no-repeat;
@@ -360,64 +360,49 @@ button:hover:not(:disabled) {
   }
 }
 
-@media (max-width: 700px) {
-  /* index.html 전용 그리드 */
-  #cardGrid {
-    grid-template-columns: repeat(3, 1fr);
+@media (max-width: 768px) {
+  body {
+    margin: 0;
+    padding: 0;
+    width: 100vw;  /* 스크롤바 없는 정확한 뷰포트 */
+    overflow-x: hidden; /* 옆으로 넘침 방지 */
   }
-   h1 {
-    font-size: 1.8rem;
+ .container {
+    padding: 0.5rem !important;
+    width: 100vw !important;
+    max-width: 100vw !important;
+    box-sizing: border-box !important;
   }
-
-  /* order.html 전용: flex 로 3장씩 */
-  .enemy-deck .card-row,
-  .user-deck .card-row {
+  button, #toBattle, #nextBtn {
+    width: 100%;
+    max-width: 98vw;       /* 거의 화면 전체, 좌우 1vw 여백 */
+    margin: 4 5 2rem auto !important;
+    font-size: 1.1rem;
+    padding: 0.8rem;
+    box-sizing: border-box !important;
+  }
+  .card-row, #cardGrid {
+    grid-template-columns: repeat(4, 1fr) !important;
     display: flex !important;
     flex-wrap: wrap !important;
     justify-content: center !important;
-    gap: 1rem;
-    margin: 0;  /* 남아 있던 여백 제거 */
-  }
-  .enemy-deck .card-row .card,
-  .user-deck .card-row .card {
-    /* 한 줄에 3개씩 고정 */
-    flex: 0 0 calc(33.333% - 1rem);
-    max-width: calc(33.333% - 1rem);
-    width: auto;  /* 고정 150px 대신 비율로 */
-  }
-  .card-row {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 1rem;
-    padding: 0;
-    margin: 0 auto;
+    align-items: center;
+    gap: 0.5rem;
+    width: 100vw; /* 여기 꼭! */
     box-sizing: border-box;
-    overflow-x: hidden;  /* 스크롤 제거 */
-    max-width: 100%;
+    margin: 0 auto !important;
+    padding: 0 !important;
+    overflow-x: hidden;
   }
-
   .card {
-    flex: 0 0 calc((100% - 2rem) / 3);  /* 3개 + gap 2개 = 2rem */
-    max-width: calc((100% - 2rem) / 3);
+    width: 20vw;     /* 한 줄에 3장 */
+    min-width: 90px; /* 너무 작아지지 않게 */
+    max-width: 1110px; /* 너무 커지지 않게 */
+    margin: 0;
     box-sizing: border-box;
-    height: auto;
   }
-
-  .card-name-box,
-  .card-desc-box {
-    font-size: 0.85rem;
-  }
-
-  .judge-section textarea {
-    width: 95%;
-  }
-}
-
-@media (max-width: 500px) {
-   .container {
-    background: none !important;  
-    box-shadow: none !important; 
+  div.card-desc-box{
+    font-size: 12px;
   }
 
   .fight-container {
@@ -428,13 +413,7 @@ button:hover:not(:disabled) {
     box-shadow: none !important;
   }
 
-
-  /* index.html 전용 그리드 */
-  #cardGrid {
-    grid-template-columns: repeat(3, 1fr);
-  }
-
-  /* order.html 전용: 모바일에도 flex 3장 */
+  /* order.html */
   .enemy-deck .card-row,
   .user-deck .card-row {
     display: flex !important;
@@ -448,10 +427,6 @@ button:hover:not(:disabled) {
     flex: 0 0 calc(33.333% - 0.5rem);
     max-width: calc(33.333% - 0.5rem);
     width: auto;
-  }
-
-  .card {
-    width: 80%;
   }
 
   h1 {
@@ -471,37 +446,43 @@ button:hover:not(:disabled) {
   #toBattle {
     font-size: 1rem;
   }
-  /*전투 화면 모바일뷰*/
-  /* 공통: 컨테이너 배경 제거 */
-  .container,
-  .fight-container,
-  .judge-section {
-    background: none !important;
-    box-shadow: none !important;
+  /*battle.html*/
+   .battle-body .card-row {
+    gap: 0.4rem;
+    overflow-x: auto;
+    width: 100vw;
+    padding: 0.2rem 0;
+  }
+  .battle-body .card-row .card {
+    flex: 0 0 10vw;   /* 화면폭 20%씩, 5장 한줄 */
+    max-width: 95px;
+    min-width: 68px;
+    margin: 0;
   }
 
+  /*fight.html*/
   /* 배틀 화면 모바일 레이아웃 */
-  .battle-body .container.fight-container {
+  .fight-body .container.fight-container {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 1rem;
     padding: 0.5rem;
     box-sizing: border-box;
   }
-  .battle-body .container.fight-container .row {
+  .fight-body .container.fight-container .row {
     display: flex;
     flex-direction: column;
     align-items: center;
     margin: 0;
     padding: 0;
   }
-  .battle-body .hp-group {
+  .fight-body .hp-group {
     display: flex;
     flex-direction: column;
     align-items: center;
     margin-bottom: 0.5rem;
   }
-  .battle-body .card-row {
+  .fight-body .card-row {
     display: flex !important;
     flex-direction: column !important;
     gap: 0.75rem;
@@ -510,24 +491,24 @@ button:hover:not(:disabled) {
     padding: 0;
     margin: 0;
   }
-  .battle-body .card {
+  .fight-body .card {
     width: 80px;
     height: auto;
   }
-  .battle-body .card.attack {
+  .fight-body .card.attack {
     transform: translateX(20px);
   }
-  .battle-body .card.defend {
+  .fight-body .card.defend {
     transform: translateX(-20px);
   }
-  .battle-body #modalBackdrop {
+  .fight-body #modalBackdrop {
     display: flex;
     justify-content: center;
     align-items: center;
     background: transparent !important;
     padding: 0 1rem;
   }
-  .battle-body #modal {
+  .fight-body #modal {
     width: 90vw;
     max-width: 360px;
     padding: 1rem;
@@ -535,7 +516,7 @@ button:hover:not(:disabled) {
     overflow: visible;
   }
 
-  /* 랭킹 화면 모바일 뷰 */
+  /*ranking.html */
   .ranking-container {
     padding: 1rem;
     overflow-x: auto;   /* ← 여기 수정되었습니다 */
@@ -602,5 +583,58 @@ button:hover:not(:disabled) {
   /* 제목 크기 조정 */
   .ranking-container h1 {
     font-size: 1.4rem;
+  }
+}
+@media (max-width: 700px) {
+  /* index.html 전용 그리드 */
+  #cardGrid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+   h1 {
+    font-size: 1.8rem;
+  }
+
+  /* order.html 전용: flex 로 3장씩 */
+  .enemy-deck .card-row,
+  .user-deck .card-row {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    justify-content: center !important;
+    gap: 1rem;
+    margin: 0;  /* 남아 있던 여백 제거 */
+  }
+  .enemy-deck .card-row .card,
+  .user-deck .card-row .card {
+    /* 한 줄에 3개씩 고정 */
+    flex: 0 0 calc(33.333% - 1rem);
+    max-width: calc(33.333% - 1rem);
+    width: auto;  /* 고정 150px 대신 비율로 */
+  }
+  .card-row {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1rem;
+    padding: 0;
+    margin: 0 auto;
+    box-sizing: border-box;
+    overflow-x: hidden;  /* 스크롤 제거 */
+    max-width: 100%;
+  }
+
+  .card {
+    flex: 0 0 calc((100% - 2rem) / 3);  /* 3개 + gap 2개 = 2rem */
+    max-width: calc((100% - 2rem) / 3);
+    box-sizing: border-box;
+    height: auto;
+  }
+
+  .card-name-box,
+  .card-desc-box {
+    font-size: 0.85rem;
+  }
+
+  .judge-section textarea {
+    width: 95%;
   }
 }
