@@ -753,7 +753,9 @@ button:hover:not(:disabled) {
   .fight-body .battle-wrap .card.defend{
       transform: translateX(-40px);
   }
-
+  #loadingBackdrop .modal{
+    margin-right: 60px;
+  }
 
   /* ④ HP·라벨 정렬 소폭 조정(옵션) */
   .hp-group{ margin-bottom:0.5rem; }
