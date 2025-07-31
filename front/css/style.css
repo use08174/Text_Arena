@@ -549,15 +549,17 @@ button:hover:not(:disabled) {
   }
 
   /* 썸네일 크기 축소/간격 줄이기 */
-  .user-cards {
-    width: 24px;
-    height: 24px;
-  }
   .user-cards-cell {
-    gap: 2px;
+    display: flex !important;
+    flex-wrap: nowrap !important;      
+    overflow-x: auto !important;       
+    gap: 4px !important;             
+    padding: 0.25rem !important;      
   }
-
-  /* 헤더 폰트도 조금 작게 */
+  .user-cards {
+    width: 20px !important;
+    height: 20px !important;
+  }
   .ranking-container h1 {
     font-size: 1.4rem;
   }
