@@ -471,47 +471,56 @@ button:hover:not(:disabled) {
   #toBattle {
     font-size: 1rem;
   }
-    .fight-container {
-    margin-left: 50px;
+     /* 1) 전투 컨테이너 2열 그리드 */
+  .battle-body .container.fight-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    padding: 0.5rem;
+    margin: 0 auto;
+    box-sizing: border-box;
+  }
+  /* 2) 각 덱(Row) 세로 스택 */
+  .battle-body .container.fight-container .row {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 1rem;
-    padding: 0.5rem;
-    box-sizing: border-box;
-    max-width: 100%;
-    width: 100%;     
+    padding-left: 0;
+    gap: 0.8rem;
+    margin-bottom: 1rem;
   }
-
-  .fight-container .card-row {
+  /* 3) 덱 라벨 */
+  .battle-body .container.fight-container .deck-label {
+    font-size: 1.2rem;
+    margin: 0;
+    text-align: center;
+  }
+  /* 4) HP 박스 아래 여백 */
+  .battle-body #aiHpDisplay,
+  .battle-body #userHpDisplay {
+    margin-bottom: 0.5rem;
+  }
+  /* 5) 카드 줄: 1행 5장 그리드 */
+  .battle-body .container.fight-container .card-row {
     display: grid;
-    grid-template-columns: repeat(5, 1fr); /* 한 줄에 5개 고정 */
+    grid-template-columns: repeat(5, 1fr);
     gap: 0.4rem;
-    width: 100%;
-    padding: 0;
-    margin: auto;
-    box-sizing: border-box;
     justify-items: center;
+    width: 100%;
   }
-
-  .fight-container .card {
-    width: 50px;                  /* 모바일에서 작게 */
-    height: auto;
-    box-sizing: border-box;
-    transition: transform 0.3s ease;
- 
+  /* 6) 팝업 배경 투명 & 중앙 고정 */
+  .battle-body #modalBackdrop {
+    background: transparent;
   }
-  .card.attack {
-  transform: translateY(30px);
-}
-
-.card.defend {
-  transform: translateY(-30px);
-}
-
-
-  .card-name-box,
-  .card-desc-box {
-    font-size: 0.65rem;
-  } 
+  .battle-body #modal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 90vw;
+    max-width: 400px;
+    max-height: 80vh;
+    overflow-y: auto;
+    z-index: 1000;
+  }
 }
