@@ -523,4 +523,58 @@ button:hover:not(:disabled) {
     overflow-y: auto;
     z-index: 1000;
   }
+  /*랭킹화면 모바일 뷰*/
+  .ranking-container {
+    padding: 0.5rem;
+  }
+  /* 숨겨둔 헤더 */
+  .ranking-container thead {
+    display: none;
+  }
+  /* 각 행을 카드처럼 */
+  .ranking-container tbody tr {
+    display: flex;
+    flex-wrap: wrap;
+    background: rgba(255,255,255,0.05);
+    margin-bottom: 0.75rem;
+    padding: 0.5rem;
+    border-radius: 6px;
+    border: 1px solid rgba(255,255,255,0.2);
+  }
+  /* 각 셀을 라벨+값으로 */
+  .ranking-container tbody td {
+    flex: 1 1 50%;
+    padding: 0.25rem 0.5rem;
+    text-align: left;
+    position: relative;
+    font-size: 0.85rem;
+    border: none;
+  }
+  /* before 콘텐츠로 헤더 이름 자동 표시 */
+  .ranking-container tbody td:nth-of-type(1)::before { content: "순위"; }
+  .ranking-container tbody td:nth-of-type(2)::before { content: "이름"; }
+  .ranking-container tbody td:nth-of-type(3)::before { content: "HP"; }
+  .ranking-container tbody td:nth-of-type(4)::before { content: "날짜"; }
+  .ranking-container tbody td:nth-of-type(5)::before { content: "사용한 캐릭터"; }
+
+  /* 라벨 스타일 */
+  .ranking-container tbody td::before {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 0.25rem;
+    color: rgba(255,255,255,0.8);
+  }
+
+  /* 캐릭터 셀은 전체 폭 차지 & 가로 스크롤 없이 wrap */
+  .user-cards-cell {
+    flex: 1 1 100%;
+    display: flex;
+    gap: 6px;
+    overflow-x: auto;
+    padding-top: 0.5rem;
+  }
+  .user-cards {
+    width: 32px;
+    height: 32px;
+  }
 }
