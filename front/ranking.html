@@ -113,10 +113,12 @@
           `;
           /* 사용 캐릭터 삽입*/
           const cell = tr.querySelector('td > .user-cards-cell');
-          ;(b.user_cards || []).slice(0,5).forEach(src => {
-            console.log('card item:', src); 
+          ;(b.user_cards || []).slice(0,5).forEach(card => {
+            console.log('card item:', card);
             const img = document.createElement('img');
-            img.src = `front/assets/${src}`;
+            let path = card.image || '';
+            if (path.startsWith('./')) path = path.slice(2);
+            img.src = path;
             img.classList.add('user-cards');
             cell.appendChild(img);
           });
