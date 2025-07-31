@@ -114,10 +114,8 @@
           /* 사용 캐릭터 삽입*/
           const cell = tr.querySelector('td > .user-cards-cell');
           ;(b.user_cards || []).slice(0,5).forEach(src => {
-            const key = String(src);
-            const fileName = src.endsWith('.png') ? src : `${src}.png`;
             const img = document.createElement('img');
-            img.src = `assets/${fileName}`;
+            img.src = `assets/${src}`;
             img.classList.add('user-cards');
             cell.appendChild(img);
           });
