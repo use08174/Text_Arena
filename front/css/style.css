@@ -526,12 +526,13 @@ button:hover:not(:disabled) {
   /*랭킹화면 모바일 뷰*/
    .ranking-container {
     padding: 1rem;
+    overflow-x: auto;    /* 가로 스크롤 허용 */
   }
 
   /* 글자 크기와 셀 패딩 줄이기 */
   #rankingTable {
     font-size: 0.75rem;
-    table-layout: fixed;
+    table-layout: fixed; /* 칸 너비 고정 */
     width: 100%;
   }
   #rankingTable th,
@@ -548,18 +549,20 @@ button:hover:not(:disabled) {
     word-break: keep-all;
   }
 
-  /* 썸네일 크기 축소/간격 줄이기 */
+  /* 썸네일 셀: 가로 스크롤, 간격 좁히기 */
   .user-cards-cell {
     display: flex !important;
-    flex-wrap: nowrap !important;      
-    overflow-x: auto !important;       
-    gap: 4px !important;             
-    padding: 0.25rem !important;      
+    flex-wrap: nowrap !important;
+    overflow-x: auto !important;
+    gap: 4px !important;
+    padding: 0.25rem !important;
   }
   .user-cards {
     width: 20px !important;
     height: 20px !important;
   }
+
+  /* 제목 크기 조정 */
   .ranking-container h1 {
     font-size: 1.4rem;
   }
