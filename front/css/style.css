@@ -542,11 +542,31 @@ button:hover:not(:disabled) {
   #rankingTable th {
     font-size: 0.85rem;
   }
+  #rankingTable th:nth-child(1),
+  #rankingTable td:nth-child(1) {
+    width: 10%;
+  }
+  /* 이름 */
+  #rankingTable th:nth-child(2),
+  #rankingTable td:nth-child(2) {
+    width: 15%;
+  }
+  /* HP */
+  #rankingTable th:nth-child(3),
+  #rankingTable td:nth-child(3) {
+    width: 10%;
+  }
 
   /* 날짜 컬럼 줄바꿈 허용 */
   #rankingTable td:nth-child(4) {
     white-space: normal;
     word-break: keep-all;
+    width: 25%;
+  }
+  /* 사용한 캐릭터 */
+  #rankingTable th:nth-child(5),
+  #rankingTable td:nth-child(5) {
+    width: 40%;
   }
 
   /* 썸네일 셀: 가로 스크롤, 간격 좁히기 */
