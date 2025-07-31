@@ -711,7 +711,7 @@ button:hover:not(:disabled) {
     transform:translate(-50%,-50%);
 
     width: 90vw;                  /* 좌우 4 vw 여백(2 vw+2 vw) */
-    max-width: 350px;             /* 너무 커지지 않게 */
+    max-width: 270px;             /* 너무 커지지 않게 */
     max-height: 60vh;             /* 세로는 화면의 80 % 까지만 */
     background:#fff;
     color:#333;
@@ -720,8 +720,7 @@ button:hover:not(:disabled) {
 
     display:flex;                 /* 내부를 위→아래로 스택 */
     flex-direction:column;
-    overflow:hidden;              /* 둥근 모서리 밖 스크롤 감춤 */
-    font-size:.9rem;             /* 모바일 기본 글자 */
+    font-size:.88rem;             /* 모바일 기본 글자 */
   }
 
   /* 2-A. 텍스트 영역 */
