@@ -46,23 +46,24 @@
     tbody tr:nth-child(odd) {
       background: rgba(255, 255, 255, 0.1);
     }
-  /* 사용 캐릭터 썸네일 */
-    .used-character-cell {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 4px;
-    justify-content: center;
-    align-items: center;
-    padding: 0.5rem 0;
-  }
- 
-  .used-character {
-    width: 32px;
-    height: 32px;
-    border-radius: 50%;
-    object-fit: cover;     
-    border: 1px solid #fff;
-  }
+    /* 사용 캐릭터 썸네일 컨테이너 */
+    .user-cards-cell {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 4px;
+      justify-content: center;
+      align-items: center;
+      padding: 0.5rem 0;
+    }
+
+    /* 각 캐릭터 썸네일 */
+    .user-cards {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 1px solid #fff;
+    }
   </style>
 </head>
 <body>
@@ -108,14 +109,14 @@
             <td>${name}</td>
             <td>${hp}</td>
             <td>${date}</td>
-            <td class="used-character-cell"></td>
+            <td><div class="user-cards-cell"></div></td>
           `;
           /* 사용 캐릭터 삽입*/
-           const cell = tr.querySelector('.used-character-cell');
+          const cell = tr.querySelector('td > .user-cards-cell');
           ;(b.user_cards || []).slice(0,5).forEach(src => {
             const img = document.createElement('img');
             img.src = `assets/${src}`;
-            img.classList.add('used-character');
+            img.classList.add('user-cards');
             cell.appendChild(img);
           });
           tbody.appendChild(tr);
