@@ -112,9 +112,9 @@
           `;
           /* 사용 캐릭터 삽입*/
            const cell = tr.querySelector('.used-character-cell');
-          ;(b.used_characters || []).slice(0,5).forEach(src => {
+          ;(b.user_cards || []).slice(0,5).forEach(src => {
             const img = document.createElement('img');
-            img.src = src.startsWith('http') ? src : `assets/${src}`;
+            img.src = `assets/${src}`;
             img.classList.add('used-character');
             cell.appendChild(img);
           });
