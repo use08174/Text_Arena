@@ -711,7 +711,7 @@ button:hover:not(:disabled) {
   .fight-body #modal{
     margin-left: -8px;
     position:fixed;               /* 뷰포트 기준으로 고정 */
-    left:50%; top:50%;
+    left:50%; top:60%;
     transform:translate(-50%,-50%);
 
     width: 85vw;                  /* 좌우 4 vw 여백(2 vw+2 vw) */
