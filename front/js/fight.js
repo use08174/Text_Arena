@@ -216,9 +216,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // 8) 최종 결과 & 랭킹 보기 버튼
     let finalText = userHP > aiHP
-      ? '최종 승리!'
+      ? '🎉최종 승리!🎉'
       : userHP < aiHP
-        ? '최종 패배...'
+        ? '최종 패배..😢'
         : '무승부';
     backdrop.style.display = 'flex';
     modal.innerHTML = `

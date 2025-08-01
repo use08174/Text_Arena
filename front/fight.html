@@ -64,18 +64,20 @@
       to { transform: rotate(360deg); }
     }
     /* 모바일에서는 배경 제거 */
-    @media (max-width: 500px) {
+    @media (max-width: 600px) {
       .modal-backdrop {
         background: transparent;
       }
-}
+  }
+
   </style>
 </head>
-<body class="battle-body">
+<body class="fight-body">
   <div class="container fight-container">
     <h1>⚔️ 전투 진행 중...</h1>
 
    <!-- AI HP & 덱 -->
+  <div class="battle-wrap">
     <div class="row">
       <div class="hp-group">
         <!-- 1) 레이블 먼저 -->
@@ -93,6 +95,7 @@
         <div id="userHpDisplay" class="hp-display">HP: 100</div>
       </div>
       <div id="userRow" class="card-row"></div>
+    </div>
     </div>
 
     <!-- 결과 팝업 -->
